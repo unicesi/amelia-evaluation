@@ -1,0 +1,53 @@
+package edu.icesi.amelia.validation.cts.subsystems
+
+import org.amelia.dsl.lib.descriptors.Host
+import java.util.List
+
+subsystem Compilation
+{
+	param Host host
+	param List<Host> associatedHosts
+	
+	var String codeSourcesFolder = "/home/carvajal/nfs/carvajal/sourcecode"
+	var String projectName = "Procedimientos_PDG_Reactor_REST"
+	var String monitoringProjectName = "Monitoring"
+	
+	on host
+	{
+		
+		directory:
+			
+			cd codeSourcesFolder
+		
+		compilation:directory;
+			
+			compile projectName + "/Server/src" projectName + "/jars/xmlServerReactorRest" -classpath #[
+				projectName + "/lib/vtd-xml.jar",
+				projectName + "/lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				projectName + "/lib/new-personalized-events-with-carvajal.jar",
+				projectName + "/lib/ojdbc6.jar",
+				projectName + "/lib/javax.ws.rs-api-2.0.jar",
+				projectName + "/lib/commons-codec-1.10.jar",
+				projectName + "/lib/xdb6.jar"]
+				
+			compile monitoringProjectName + "/src" "monitoring" -classpath #[
+				monitoringProjectName + "/lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				monitoringProjectName + "/lib/new-personalized-events-with-carvajal.jar",
+				monitoringProjectName + "/lib/slf4j-api-1.7.10.jar",
+				monitoringProjectName + "/lib/sigar.jar"]
+				
+		localCopy:compilation;
+		
+			cmd "cp -rf " + projectName + "/jars " + "/home/carvajal/nfs/Carvajal/"
+			cmd "cp " + "monitoring.jar " + "/home/carvajal/nfs/Carvajal/jars"
+	}
+	
+	on associatedHosts
+	{
+		remoteCopy:localCopy;
+		
+			cmd "cp -rf " + "/home/carvajal/nfs/Carvajal/jars " + "/home/carvajal/Documents/carvajal"
+			cmd "cp -rf " + "/home/carvajal/nfs/Carvajal/lib " + "/home/carvajal/Documents/carvajal" 
+	}
+	
+}

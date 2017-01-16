@@ -1,0 +1,138 @@
+package edu.icesi.amelia.validation.cts.deployments
+
+import org.amelia.dsl.lib.util.RetryableDeployment
+import org.amelia.dsl.lib.descriptors.Host
+
+import edu.icesi.amelia.validation.cts.subsystems.Compilation
+import edu.icesi.amelia.validation.cts.subsystems.ExternalProbe
+import edu.icesi.amelia.validation.cts.subsystems.LoadBalancer
+import edu.icesi.amelia.validation.cts.subsystems.StoreProcedures
+import edu.icesi.amelia.validation.cts.subsystems.Bridge
+import edu.icesi.amelia.validation.cts.subsystems.Server
+import edu.icesi.amelia.validation.cts.subsystems.Apache
+import edu.icesi.amelia.validation.cts.subsystems.JMeter_Report_12NO
+import edu.icesi.amelia.validation.cts.subsystems.Monitors
+
+includes edu.icesi.amelia.validation.cts.subsystems.Compilation
+includes edu.icesi.amelia.validation.cts.subsystems.ExternalProbe
+includes edu.icesi.amelia.validation.cts.subsystems.LoadBalancer
+includes edu.icesi.amelia.validation.cts.subsystems.StoreProcedures
+includes edu.icesi.amelia.validation.cts.subsystems.Bridge
+includes edu.icesi.amelia.validation.cts.subsystems.Server
+includes edu.icesi.amelia.validation.cts.subsystems.Apache
+includes edu.icesi.amelia.validation.cts.subsystems.JMeter_Report_12NO
+includes edu.icesi.amelia.validation.cts.subsystems.Monitors
+
+
+
+deployment R_12CO_12NO_1MB
+{	
+	
+	//-------------------------------------------------------------------
+	//<Variables>
+	//-------------------------------------------------------------------
+	
+	//Num components
+	val numComponents = 12
+	
+	//JMeter MB
+	val jmeterMB = 1
+	
+	
+	//-------------------------------------------------------------------
+	//</Variables>
+	//-------------------------------------------------------------------
+	
+	
+	//..................................................................................................................
+	
+	
+	//SPs
+	val spHost1 = new Host("hgrid1",21,22,"carvajal","hgrid18","sp1")
+	val spHost2 = new Host("hgrid18",21,22,"carvajal","hgrid18","sp2")
+	val spHost3 = new Host("hgrid20",21,22,"carvajal","hgrid18","sp3")
+	val spHost4 = new Host("hgrid11",21,22,"carvajal","hgrid18","sp4")
+	
+	val spHost5 = new Host("hgrid13",21,22,"carvajal","hgrid18","sp5")
+	val spHost6 = new Host("hgrid6",21,22,"carvajal","hgrid18","sp6")
+	val spHost7 = new Host("hgrid9",21,22,"carvajal","hgrid18","sp7")
+	val spHost8 = new Host("hgrid10",21,22,"carvajal","hgrid18","sp8")
+	
+	val spHost9 = new Host("hgrid4",21,22,"carvajal","hgrid18","sp9")
+	val spHost10 = new Host("hgrid5",21,22,"carvajal","hgrid18","sp10")
+	val spHost11 = new Host("hgrid7",21,22,"carvajal","hgrid18","sp11")
+	val spHost12 = new Host("hgrid8",21,22,"carvajal","hgrid18","sp12")
+	
+	val spHosts = #[spHost1,spHost2,spHost3,spHost4,spHost5,spHost6,spHost7,spHost8,spHost9,spHost10,spHost11,spHost12]
+	
+	//..................................................................................................................
+	
+	//Compilation
+	val compilationHost =  new Host("hgrid17",21,22,"carvajal","hgrid18","Compilation")
+	
+	//External Probe
+	val Host hostExternalProbe = new Host("hgrid17",21,22,"carvajal","hgrid18","ExternalProbe")
+	
+	//Load Balancer
+	val Host hostLoadBalancer = new Host("hgrid16",21,22,"carvajal","hgrid18","LoadBalancer") 
+	
+	
+	//Server
+	val serverHost = new Host("hgrid16",21,22,"carvajal","hgrid18","Server")
+	
+	
+	//Bridge
+	val bridgeHost = new Host("hgrid16",21,22,"carvajal","hgrid18","Bridge")
+	
+	//Apache
+	val apacheHost =  new Host("hgrid16",21,22,"carvajal","hgrid18","Apache")
+	
+	//-------------------------------------------------------------------
+	//<Associated Hosts (compilation)>
+	//-------------------------------------------------------------------
+	
+	val associatedHosts = (#[serverHost,bridgeHost] + spHosts).toList
+	
+	//-------------------------------------------------------------------
+	//</Associated Hosts (compilation)>
+	//-------------------------------------------------------------------
+		
+	val deployHelper = new RetryableDeployment
+	
+	for(i: 1..1)
+	{
+		deployHelper.deploy([
+			 
+			add(new Compilation(numComponents,compilationHost,associatedHosts))
+ 			add(new ExternalProbe(hostExternalProbe))	
+			add(new LoadBalancer(hostLoadBalancer))
+			add(new StoreProcedures(numComponents,spHost1,spHost2,spHost3,spHost4,spHost5,spHost6,spHost7,spHost8,spHost9,spHost10,spHost11,spHost12, spHosts))
+			add(new Bridge(numComponents,bridgeHost))
+			add(new Server(serverHost))
+			add(new Apache(apacheHost))
+			
+			add(new Monitors(new Host("hgrid16",21,22,"carvajal","hgrid18","IntermediateM"),"BridgeServerLoadBalancer"))
+			
+			add(new Monitors(new Host("hgrid1",21,22,"carvajal","hgrid18","sp1M"),"sp1"))
+			add(new Monitors(new Host("hgrid18",21,22,"carvajal","hgrid18","sp2M"),"sp2"))
+			add(new Monitors(new Host("hgrid20",21,22,"carvajal","hgrid18","sp3M"),"sp3"))
+			add(new Monitors(new Host("hgrid11",21,22,"carvajal","hgrid18","sp4M"),"sp4"))
+			
+			add(new Monitors(new Host("hgrid13",21,22,"carvajal","hgrid18","sp5M"),"sp5"))
+			add(new Monitors(new Host("hgrid6",21,22,"carvajal","hgrid18","sp6M"),"sp6"))
+			add(new Monitors(new Host("hgrid9",21,22,"carvajal","hgrid18","sp7M"),"sp7"))
+			add(new Monitors(new Host("hgrid10",21,22,"carvajal","hgrid18","sp8M"),"sp8"))
+			
+			add(new Monitors(new Host("hgrid4",21,22,"carvajal","hgrid18","sp9M"),"sp9"))
+			add(new Monitors(new Host("hgrid5",21,22,"carvajal","hgrid18","sp10M"),"sp10"))
+			add(new Monitors(new Host("hgrid7",21,22,"carvajal","hgrid18","sp11M"),"sp11"))
+			add(new Monitors(new Host("hgrid8",21,22,"carvajal","hgrid18","sp12M"),"sp12"))
+			
+			add(new JMeter_Report_12NO(jmeterMB,new Host("hgrid16",21,22,"carvajal","hgrid18","JMeter"),new Host("hgrid17",21,22,"carvajal","hgrid18","Report")))
+			
+			start(true)
+			
+		],1)
+	}
+	
+}

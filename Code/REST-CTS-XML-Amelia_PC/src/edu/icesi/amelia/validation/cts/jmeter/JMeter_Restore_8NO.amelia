@@ -1,0 +1,46 @@
+package edu.icesi.amelia.validation.cts.jmeter
+
+import org.amelia.dsl.lib.descriptors.Host
+
+depends on edu.icesi.amelia.validation.cts.monitors.Monitor_11
+
+subsystem JMeter_Restore_8NO
+{
+	
+	param Host host
+	param String meterfileName
+	param Host hostRabbit
+	param String reportLoc	
+	
+	on host
+	{
+		jMeterDirectory:
+			cd "/home/carvajal/Documents/carvajal/apache-jmeter-2.13/bin"
+		
+		call:jMeterDirectory;
+			cmd "./jmeter -n -t " + "/home/carvajal/Documents/carvajal/ArchivosJmeterXML/"+meterfileName ... => [withoutTimeout]
+			
+	}
+	
+	on hostRabbit
+	{
+		directory:call;
+			cd "/home/carvajal/Documents/carvajal"
+		
+		report:directory;
+			run "reporter" -libpath #[
+					"jars/monitoring.jar",
+					"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+					"lib/new-personalized-events-with-carvajal.jar",
+					"lib/slf4j-api-1.7.10.jar",
+					"lib/sigar.jar"
+				] -s "generateReports" -m "generateGeneralReport" -p reportLoc ... => [withoutTimeout]
+	}
+	
+//	on hostRestore
+//	{
+//		
+//	}
+	
+	
+}

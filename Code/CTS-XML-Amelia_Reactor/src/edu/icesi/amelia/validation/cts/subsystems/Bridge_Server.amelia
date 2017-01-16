@@ -1,0 +1,48 @@
+package edu.icesi.amelia.validation.cts.subsystems
+
+import org.amelia.dsl.lib.descriptors.Host
+
+depends on StoreProcedures
+
+subsystem Bridge_Server
+{
+	
+	param Host host
+	param Integer deploymentType
+	
+	on host
+	{
+		
+		directory:
+			
+			cd "/home/carvajal/Documents/carvajal/"
+		
+		executeBridge:directory;
+		
+			run "procedimientos_bridge_"+deploymentType -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				] //... => [withoutTimeout]
+				
+		executeServer:executeBridge;
+			
+			run "procedimientos_server" -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+			]
+
+	}
+	
+}

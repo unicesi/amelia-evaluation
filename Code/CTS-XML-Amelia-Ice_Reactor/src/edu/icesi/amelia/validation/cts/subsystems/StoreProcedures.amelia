@@ -1,0 +1,233 @@
+package edu.icesi.amelia.validation.cts.subsystems
+
+import org.amelia.dsl.lib.descriptors.Host
+import java.util.List
+import edu.icesi.amelia.validation.cts.classes.IceInteraction
+
+includes Directory
+
+depends on LoadBalancer
+
+subsystem StoreProcedures
+{
+	param Integer numCom
+	param Host hostSP1
+	param Host hostSP2
+	param Host hostSP3
+	param Host hostSP4
+	param Host hostSP5
+	param Host hostSP6
+	param Host hostSP7
+	param Host hostSP8
+	param Host hostSP9
+	param Host hostSP10
+	param Host hostSP11
+	param Host hostSP12
+
+	var List<Host> exec6CO1 = #[hostSP1,hostSP3,hostSP10,hostSP11,hostSP7,hostSP4]
+	var List<Host> exec6CO2 = #[hostSP2,hostSP9,hostSP6,hostSP12,hostSP8,hostSP5]
+	var List<Host> exec12CO = (exec6CO1 + exec6CO2).toList
+
+	on hostSP1 ? numCom == 1
+	{
+		
+		execution1CO1:directory;
+		
+			IceInteraction.runSPIce("asignaParentesco")
+	}
+	
+	on hostSP2 ? numCom == 1
+	{
+		execution2CO1:directory;
+		
+			IceInteraction.runSPIce("uspVerificacion")
+	}
+	
+	on hostSP3 ? numCom == 1
+	{
+		execution3CO1:directory;
+		
+			IceInteraction.runSPIce("actualizaSesion")
+	}
+	
+	on hostSP4 ? numCom == 1
+	{
+		execution4CO1:directory;
+		
+			IceInteraction.runSPIce("borradoIntegrante")
+	}
+	
+	on hostSP5 ? numCom == 1
+	{
+		execution5CO1:directory;
+		
+			IceInteraction.runSPIce("calificacionRiesgo")
+	}
+	
+	on hostSP6 ? numCom == 1
+	{
+		execution6CO1:directory;
+		
+			IceInteraction.runSPIce("uspCaracteristicas")
+	}
+	
+	on hostSP7 ? numCom == 1
+	{
+		execution7CO1:directory;
+		
+			IceInteraction.runSPIce("generarEliminacion")
+	}
+	
+	on hostSP8 ? numCom == 1
+	{
+		execution8CO1:directory;
+		
+			IceInteraction.runSPIce("generarInsert")
+	}
+	
+	on hostSP9 ? numCom == 1
+	{
+		execution9CO1:directory;
+		
+			IceInteraction.runSPIce("uspModFamilias")
+	}
+	
+	on hostSP10 ? numCom == 1
+	{
+		execution10CO1:directory;
+		
+			IceInteraction.runSPIce("salidaIntegrantes")
+	}
+	
+	on hostSP11 ? numCom == 1
+	{
+		execution11CO1:directory;
+		
+			IceInteraction.runSPIce("sentenciaFolio")
+	}
+	
+	on hostSP12 ? numCom == 1
+	{
+		execution12CO1:directory;
+		
+			IceInteraction.runSPIce("sentenciaInsertUpdWhere")
+	}
+	
+	//--------------------------------------------------------------------------------
+	
+	
+	on exec6CO1 ? numCom == 6
+	{
+		
+		execution1CO61:directory;
+		
+			IceInteraction.runSPIce("asignaParentesco")
+				
+		execution2CO61:directory;
+		
+			IceInteraction.runSPIce("uspVerificacion")
+				
+		execution3CO61:directory;
+		
+			IceInteraction.runSPIce("actualizaSesion")
+				
+		execution4CO61:directory;
+		
+			IceInteraction.runSPIce("uspModFamilias")
+				
+		execution5CO61:directory;
+		
+			IceInteraction.runSPIce("salidaIntegrantes")
+		
+		execution6CO61:directory;
+		
+		    IceInteraction.runSPIce("uspCaracteristicas")
+	}
+	
+	on exec6CO2 ? numCom == 6
+	{
+		execution1CO62:directory;
+		
+			IceInteraction.runSPIce("sentenciaFolio")
+				
+		execution2CO62:directory;
+		
+			IceInteraction.runSPIce("sentenciaInsertUpdWhere")
+				
+		execution3CO62:directory;
+		
+			IceInteraction.runSPIce("generarEliminacion")
+				
+		execution4CO62:directory;
+		
+			IceInteraction.runSPIce("generarInsert")
+				
+		execution5CO62:directory;
+		
+			IceInteraction.runSPIce("borradoIntegrante")
+				
+		execution6CO62:directory;
+		
+			IceInteraction.runSPIce("calificacionRiesgo")
+		
+	}
+	
+	
+	//--------------------------------------------------------------------------------
+	
+	
+	on exec12CO ? numCom == 12
+	{
+			
+			execution1CO12:directory;
+		
+			IceInteraction.runSPIce("asignaParentesco")
+				
+		execution2CO12:directory;
+		
+			IceInteraction.runSPIce("uspVerificacion")
+				
+		execution3CO12:directory;
+		
+			IceInteraction.runSPIce("actualizaSesion")
+				
+		execution4CO12:directory;
+		
+			IceInteraction.runSPIce("borradoIntegrante")
+				
+		execution5CO12:directory;
+		
+			IceInteraction.runSPIce("calificacionRiesgo")
+				
+		execution6CO12:directory;
+		
+			 IceInteraction.runSPIce("uspCaracteristicas")
+				
+		execution7CO12:directory;
+		
+			IceInteraction.runSPIce("generarEliminacion")
+				
+		execution8CO12:directory;
+		
+			IceInteraction.runSPIce("generarInsert")
+				
+		execution9CO12:directory;
+		
+			IceInteraction.runSPIce("uspModFamilias")
+				
+		execution10CO12:directory;
+		
+			IceInteraction.runSPIce("salidaIntegrantes")
+				
+		execution11CO12:directory;
+		
+			IceInteraction.runSPIce("sentenciaFolio")
+				
+		execution12CO12:directory;
+		
+			IceInteraction.runSPIce("sentenciaInsertUpdWhere")
+	}
+	
+	
+	
+}

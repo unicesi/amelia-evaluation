@@ -1,0 +1,23 @@
+package edu.icesi.amelia.validation.cts.subsystems
+
+import org.amelia.dsl.lib.descriptors.Host
+import edu.icesi.amelia.validation.cts.classes.IceInteraction
+
+depends on Apache
+
+subsystem Monitors
+{
+	param Host host
+	param String name  
+	
+	on host
+	{
+		directory:
+			cd "/home/carvajal/Documents/carvajal/jars/iceJars"
+			
+		execute:directory;
+
+			IceInteraction.runMonitorIce(name)
+	}
+	
+}

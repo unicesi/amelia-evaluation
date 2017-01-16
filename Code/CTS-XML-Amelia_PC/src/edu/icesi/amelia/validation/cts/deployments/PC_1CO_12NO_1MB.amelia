@@ -1,0 +1,157 @@
+package edu.icesi.amelia.validation.cts.deployments
+
+import org.amelia.dsl.lib.util.RetryableDeployment
+import edu.icesi.amelia.validation.cts.subsystems.Compilation
+import org.amelia.dsl.lib.descriptors.Host
+import edu.icesi.amelia.validation.cts.subsystems.Queue
+import edu.icesi.amelia.validation.cts.subsystems.Consumers
+import edu.icesi.amelia.validation.cts.subsystems.Run_Bridge_Intermediate_Server
+import edu.icesi.amelia.validation.cts.jmeter.JMeter_Restore_12NO
+//import edu.icesi.amelia.validation.cts.subsystems.pc.onecomponent.onenode.InitDB
+import edu.icesi.amelia.validation.cts.subsystems.ExternalProbe
+
+import edu.icesi.amelia.validation.cts.monitors.Monitor_1
+import edu.icesi.amelia.validation.cts.monitors.Monitor_2
+import edu.icesi.amelia.validation.cts.monitors.Monitor_3
+import edu.icesi.amelia.validation.cts.monitors.Monitor_4
+import edu.icesi.amelia.validation.cts.monitors.Monitor_5
+import edu.icesi.amelia.validation.cts.monitors.Monitor_6
+import edu.icesi.amelia.validation.cts.monitors.Monitor_7
+import edu.icesi.amelia.validation.cts.monitors.Monitor_8
+import edu.icesi.amelia.validation.cts.monitors.Monitor_9
+import edu.icesi.amelia.validation.cts.monitors.Monitor_10
+import edu.icesi.amelia.validation.cts.monitors.Monitor_11
+import edu.icesi.amelia.validation.cts.monitors.Monitor_12
+import edu.icesi.amelia.validation.cts.monitors.Monitor_13
+import edu.icesi.amelia.validation.cts.monitors.Monitor_14
+import edu.icesi.amelia.validation.cts.monitors.Monitor_15
+
+//includes edu.icesi.amelia.validation.cts.subsystems.pc.onecomponent.onenode.InitDB
+includes edu.icesi.amelia.validation.cts.subsystems.ExternalProbe
+includes edu.icesi.amelia.validation.cts.subsystems.Compilation
+includes edu.icesi.amelia.validation.cts.subsystems.Queue
+includes edu.icesi.amelia.validation.cts.subsystems.Consumers
+includes edu.icesi.amelia.validation.cts.subsystems.Run_Bridge_Intermediate_Server
+includes edu.icesi.amelia.validation.cts.jmeter.JMeter_Restore_12NO
+
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_1
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_2
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_3
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_4
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_5
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_6
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_7
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_8
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_9
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_10
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_11
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_12
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_13
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_14
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_15
+
+deployment PC_1CO_12NO_1MB
+{
+	
+	java.lang.System.setProperty("amelia.color_output", "false")
+	
+	//-------------------------------------------------------------------
+	//<Variables>
+	//-------------------------------------------------------------------
+	
+	//Bd Connection
+	val bdConnection = 4
+	
+	//Bd
+	val Host hostBD = new Host("hgrid3",21,22,"carvajal","hgrid18","bd")
+	
+	//External Probe
+	val Host hostExternalProbe = new  Host("hgrid17",21,22,"carvajal","hgrid18","rabbit")
+	val String reportLoc = "/home/carvajal/Documents/new_Carvajal/REPORTE/"
+	
+	//Queue
+	val queueHostIp = "hgrid17"
+	val queueHostId = "idHostQueue"
+	
+	//Consumers
+	val consumHost1 = new Host("hgrid1",21,22,"carvajal","hgrid18","consum1")
+	val consumHost2 = new Host("hgrid4",21,22,"carvajal","hgrid18","consum2")
+	val consumHost3 = new Host("hgrid5",21,22,"carvajal","hgrid18","consum3")
+	val consumHost4 = new Host("hgrid6",21,22,"carvajal","hgrid18","consum4")
+	
+	val consumHost5 = new Host("hgrid7",21,22,"carvajal","hgrid18","consum5")
+	val consumHost6 = new Host("hgrid8",21,22,"carvajal","hgrid18","consum6")
+	val consumHost7 = new Host("hgrid9",21,22,"carvajal","hgrid18","consum7")
+	val consumHost8 = new Host("hgrid10",21,22,"carvajal","hgrid18","consum8")
+	
+	val consumHost9 = new Host("hgrid11",21,22,"carvajal","hgrid18","consum9")
+	val consumHost10 = new Host("hgrid13",21,22,"carvajal","hgrid18","consum10")
+	val consumHost11 = new Host("hgrid18",21,22,"carvajal","hgrid18","consum11")
+	val consumHost12 = new Host("hgrid20",21,22,"carvajal","hgrid18","consum12")
+	
+	val consumerHosts = #[consumHost1,consumHost2,consumHost3,consumHost4,consumHost5,consumHost6,consumHost7,consumHost8,consumHost9,consumHost10,consumHost11,consumHost12]
+
+	
+	//Compilation
+	val codeSourcesFolder = "/home/carvajal/nfs/carvajal/sourcecode";
+	val serverHost = new Host("hgrid16",21,22,"carvajal","hgrid18","idServer")
+	val queueHost = new Host(queueHostIp,21,22,"carvajal","hgrid18","idQueue")
+	val intermHost = new Host("hgrid14",21,22,"carvajal","hgrid18","idInterm")
+	//-------------------------------------------------------------------
+	val compilationHostIp = "hgrid17"
+	val compilationHostId = "compilation"
+	
+	val associatedHosts = #[serverHost, queueHost, intermHost, consumHost1, consumHost2, consumHost3, consumHost4, consumHost5, consumHost6, consumHost7, consumHost8, consumHost9, consumHost10, consumHost11, consumHost12, hostExternalProbe]
+	
+	//Bridge_Intermediate_server
+	val hostBridgeServer = serverHost
+	val hostIntermediate = intermHost
+	val numNodes = 12
+	val numComponents = 1
+	
+	//Monitors
+	
+	//val monitorHosts = consumerHosts + #[serverHost,queueHost,intermHost]
+	
+	//JMeter
+	val Host hostJmeter = serverHost
+	
+	//-------------------------------------------------------------------
+	//</Variables>
+	//-------------------------------------------------------------------
+	
+	val deployHelper = new RetryableDeployment
+	
+	
+	for(i: 1..1)
+	{
+		deployHelper.deploy([
+			
+ 			//add(new InitDB(hostBD))
+ 			add(new ExternalProbe(hostExternalProbe))
+			add(new Compilation(codeSourcesFolder,associatedHosts, compilationHostIp, compilationHostId))
+			add(new Queue(queueHostIp, queueHostId))
+			add(new Consumers(consumerHosts, 1, bdConnection)) 
+			add(new Run_Bridge_Intermediate_Server(hostBridgeServer, hostIntermediate, numNodes, numComponents))
+			add(new Monitor_1(consumHost1,"consum1"))
+			add(new Monitor_2(consumHost2,"consum2"))
+			add(new Monitor_3(consumHost3,"consum3"))
+			add(new Monitor_4(consumHost4,"consum4"))
+			add(new Monitor_5(consumHost5,"consum5"))
+			add(new Monitor_6(consumHost6,"consum6"))
+			add(new Monitor_7(consumHost7,"consum7"))
+			add(new Monitor_8(consumHost8,"consum8"))
+			add(new Monitor_9(consumHost9,"consum9"))
+			add(new Monitor_10(consumHost10,"consum10"))
+			add(new Monitor_11(consumHost11,"consum11"))
+			add(new Monitor_12(consumHost12,"consum12"))
+			add(new Monitor_13(intermHost,"interm"))
+			add(new Monitor_14(queueHost,"queue"))
+			add(new Monitor_15(serverHost,"server"))
+			add(new JMeter_Restore_12NO(hostJmeter, "XML-REST-1MB.jmx",hostBD, hostExternalProbe, reportLoc))
+			start(true)
+			
+		],1)
+	}
+	
+}

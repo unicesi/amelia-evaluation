@@ -1,0 +1,140 @@
+package edu.icesi.amelia.validation.cts.deployments 
+
+import org.amelia.dsl.lib.util.RetryableDeployment
+import edu.icesi.amelia.validation.cts.subsystems.Compilation
+import org.amelia.dsl.lib.descriptors.Host
+import edu.icesi.amelia.validation.cts.subsystems.ExternalProbe
+
+import edu.icesi.amelia.validation.cts.monitors.Monitor_1 
+import edu.icesi.amelia.validation.cts.monitors.Monitor_2
+import edu.icesi.amelia.validation.cts.monitors.Monitor_3
+import edu.icesi.amelia.validation.cts.monitors.Monitor_4
+import edu.icesi.amelia.validation.cts.monitors.Monitor_5
+import edu.icesi.amelia.validation.cts.monitors.Monitor_6
+import edu.icesi.amelia.validation.cts.monitors.Monitor_7
+import edu.icesi.amelia.validation.cts.monitors.Monitor_8
+import edu.icesi.amelia.validation.cts.monitors.Monitor_9
+import edu.icesi.amelia.validation.cts.monitors.Monitor_10
+import edu.icesi.amelia.validation.cts.monitors.Monitor_11
+import edu.icesi.amelia.validation.cts.monitors.Monitor_12
+import edu.icesi.amelia.validation.cts.monitors.Monitor_13
+import edu.icesi.amelia.validation.cts.subsystems.JMeter_12NO
+import edu.icesi.amelia.validation.cts.subsystems.LoadBalancer
+import edu.icesi.amelia.validation.cts.subsystems.StoreProcedures
+import edu.icesi.amelia.validation.cts.subsystems.Bridge_Server
+import java.util.Map
+import org.amelia.dsl.lib.util.Hosts
+
+includes edu.icesi.amelia.validation.cts.subsystems.ExternalProbe
+includes edu.icesi.amelia.validation.cts.subsystems.Compilation
+includes edu.icesi.amelia.validation.cts.subsystems.LoadBalancer
+includes edu.icesi.amelia.validation.cts.subsystems.StoreProcedures
+includes edu.icesi.amelia.validation.cts.subsystems.Bridge_Server
+includes edu.icesi.amelia.validation.cts.subsystems.JMeter_12NO
+
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_1
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_2
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_3
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_4
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_5
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_6
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_7
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_8
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_9
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_10
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_11
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_12
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_13
+
+
+deployment R_12CO_12NO_5MB
+{
+	
+	//-------------------------------------------------------------------
+	//<Variables>
+	//-------------------------------------------------------------------
+	
+	//Bd Connection
+	val bdConnection = 1
+	
+	//Num Components
+	val numComponents = 12
+	
+	//JMeter size
+	val jMeterMB = 5
+	
+	//-------------------------------------------------------------------
+	//</Variables>
+	//-------------------------------------------------------------------
+	
+	//All available hosts
+	val Map<String, Host> allHosts = Hosts.hosts("/home/carvajal/Documents/LF_RIVERA/Workspace_Neon/REST-CTS-XML-Amelia_Reactor/src/hosts.txt").toMap[h|h.identifier]
+	
+	//Compilation host
+	val Host compilationHost = allHosts.get("compilationExternalProbe")
+	
+	//External Probe
+	val Host hostExternalProbe = allHosts.get("compilationExternalProbe")
+	
+	//Components host
+	val Host componentsHost = allHosts.get("bridgeServerLoadBalancerJmeter")
+	
+	//SPs
+	val spHost1 = allHosts.get("sp1")
+	val spHost2 = allHosts.get("sp2")
+	val spHost3 = allHosts.get("sp3")
+	val spHost4 = allHosts.get("sp4")
+	
+	val spHost5 = allHosts.get("sp5")
+	val spHost6 = allHosts.get("sp6")
+	val spHost7 = allHosts.get("sp7")
+	val spHost8 = allHosts.get("sp8")
+	
+	val spHost9 = allHosts.get("sp9")
+	val spHost10 = allHosts.get("sp10")
+	val spHost11 = allHosts.get("sp11")
+	val spHost12 = allHosts.get("sp12")
+	
+	//SP Hosts
+	val spHosts = #[spHost1, spHost2, spHost3, spHost4, spHost5, spHost6, spHost7, spHost8, spHost9, spHost10, spHost11, spHost12]
+	
+	//Associated Hosts
+	val associatedHosts = (#[componentsHost] + spHosts).toList
+	
+	//JMeter
+	val Host hostJmeter = componentsHost
+	
+	val deployHelper = new RetryableDeployment
+ 
+	 
+	for(i: 1..1)
+	{
+		deployHelper.deploy([
+			
+			add(new Compilation(compilationHost, associatedHosts))
+ 			add(new ExternalProbe(hostExternalProbe))
+			add(new LoadBalancer(componentsHost))
+			add(new StoreProcedures(bdConnection, numComponents, spHost1, spHost2, spHost3, spHost4, spHost5, spHost6, spHost7, spHost8, spHost9, spHost10, spHost11, spHost12, spHosts))
+			add(new Bridge_Server(componentsHost, numComponents))
+			add(new Monitor_1(spHost1,"sp1"))
+			add(new Monitor_2(spHost2,"sp2"))
+			add(new Monitor_3(spHost3,"sp3"))
+			add(new Monitor_4(spHost4,"sp4"))
+			add(new Monitor_5(spHost5,"sp5"))
+			add(new Monitor_6(spHost6,"sp6"))
+			add(new Monitor_7(spHost7,"sp7"))
+			add(new Monitor_8(spHost8,"sp8"))
+			add(new Monitor_9(spHost9,"sp9"))
+			add(new Monitor_10(spHost10,"sp10"))
+			add(new Monitor_11(spHost11,"sp11"))
+			add(new Monitor_12(spHost12,"sp12"))
+			add(new Monitor_13(componentsHost,"bridge")) 
+			
+			add(new JMeter_12NO(hostJmeter,hostExternalProbe, jMeterMB))
+			start(true)
+			
+		],1)
+	}
+
+}
+	

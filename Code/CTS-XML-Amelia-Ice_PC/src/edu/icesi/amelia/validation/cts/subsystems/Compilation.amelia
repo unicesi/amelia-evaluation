@@ -1,0 +1,90 @@
+package edu.icesi.amelia.validation.cts.subsystems
+
+import org.amelia.dsl.lib.descriptors.Host
+import java.util.List
+import edu.icesi.amelia.validation.cts.classes.IceInteraction
+
+subsystem Compilation
+{
+	param Integer numNodes
+	param Integer numComponents
+	param Integer bdConnection
+	param Host compilationHost
+	param List<Host> associatedHosts
+	
+	on compilationHost
+	{
+		
+		removeIceJars:
+			
+			cmd "rm -Rf /home/carvajal/nfs/Carvajal/jars/iceJars"
+			cmd "mkdir /home/carvajal/nfs/Carvajal/jars/iceJars"
+		
+		directoryMonitoring:removeIceJars;
+		
+			cd "/home/carvajal/nfs/Carvajal/sourcecode/Monitoring_Ice/monitoring/"
+			
+		compilationMonitoring:directoryMonitoring;
+		
+			IceInteraction.compileIce("external_probe")
+			
+			IceInteraction.compileIce("monitor")
+			
+			IceInteraction.compileIce("reporter")		
+		
+		
+		directoryIce:compilationMonitoring;
+			
+			cd "/home/carvajal/nfs/Carvajal/sourcecode/IcesiCarvajalWS/PcIce/"
+			
+		initialIceCompilation:directoryIce;
+			
+			IceInteraction.compileIce("queue")
+			
+			IceInteraction.compileIce("server")
+			
+			IceInteraction.compileIce("xmlProcessor")
+			
+			IceInteraction.compileIce("intermediate_Control_" + numNodes + "_" + numComponents)
+			
+			IceInteraction.compileIce("spProcessor_1_" + bdConnection)
+			
+		compilation6CO ? numComponents == 6 || numComponents == 12 :directoryIce;
+		
+			IceInteraction.compileIce("spProcessor_2_" + bdConnection)
+			
+			IceInteraction.compileIce("spProcessor_3_" + bdConnection)
+			
+			IceInteraction.compileIce("spProcessor_4_" + bdConnection)
+			
+			IceInteraction.compileIce("spProcessor_5_" + bdConnection)
+			
+			IceInteraction.compileIce("spProcessor_6_" + bdConnection)
+			
+		compilation12CO ? numComponents == 12 :directoryIce;
+		
+			IceInteraction.compileIce("spProcessor_7_" + bdConnection)
+			
+			IceInteraction.compileIce("spProcessor_8_" + bdConnection)
+			
+			IceInteraction.compileIce("spProcessor_9_" + bdConnection)
+			
+			IceInteraction.compileIce("spProcessor_10_" + bdConnection)
+			
+			IceInteraction.compileIce("spProcessor_11_" + bdConnection)
+			
+			IceInteraction.compileIce("spProcessor_12_" + bdConnection)
+									
+	}
+	
+	on associatedHosts
+	{
+		remoteCopy:initialIceCompilation,compilation6CO,compilation12CO;
+		
+			cmd "rm -Rf /home/carvajal/Documents/carvajal/jars/iceJars"
+			cmd "cp -rf " + "/home/carvajal/nfs/Carvajal/jars " + "/home/carvajal/Documents/carvajal"
+			cmd "cp -rf " + "/home/carvajal/nfs/Carvajal/lib " + "/home/carvajal/Documents/carvajal" 
+	}
+	
+	
+}

@@ -1,0 +1,26 @@
+package edu.icesi.amelia.validation.cts.subsystems
+
+import org.amelia.dsl.lib.descriptors.Host
+import edu.icesi.amelia.validation.cts.classes.IceInteraction
+
+depends on StoreProcedures
+
+subsystem Bridge
+{
+	
+	param Integer numComponents
+	param Host hostBridge
+	
+	on hostBridge
+	{
+		directory:
+			cd "/home/carvajal/Documents/carvajal/jars/iceJars"
+		
+		executeInter:directory;
+		
+			IceInteraction.runBridgeIce("bridgeXml_12_" + numComponents)
+				
+				
+	}
+	
+}

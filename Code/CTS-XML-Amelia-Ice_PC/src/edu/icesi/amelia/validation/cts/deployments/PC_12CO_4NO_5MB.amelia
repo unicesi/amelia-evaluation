@@ -1,0 +1,147 @@
+package edu.icesi.amelia.validation.cts.deployments
+
+import org.amelia.dsl.lib.util.RetryableDeployment
+import org.amelia.dsl.lib.descriptors.Host
+
+import edu.icesi.amelia.validation.cts.subsystems.Compilation
+import edu.icesi.amelia.validation.cts.subsystems.ExternalProbe
+import edu.icesi.amelia.validation.cts.subsystems.Queue
+import edu.icesi.amelia.validation.cts.subsystems.Consumers
+import edu.icesi.amelia.validation.cts.subsystems.XmlProcessor
+import edu.icesi.amelia.validation.cts.subsystems.Intermediate
+import edu.icesi.amelia.validation.cts.subsystems.Server
+import edu.icesi.amelia.validation.cts.subsystems.Apache
+import edu.icesi.amelia.validation.cts.jmeter.JMeter_Report_4NO
+
+import edu.icesi.amelia.validation.cts.monitors.Monitor_1
+import edu.icesi.amelia.validation.cts.monitors.Monitor_2
+import edu.icesi.amelia.validation.cts.monitors.Monitor_3
+import edu.icesi.amelia.validation.cts.monitors.Monitor_4
+import edu.icesi.amelia.validation.cts.monitors.Monitor_5
+import edu.icesi.amelia.validation.cts.monitors.Monitor_6
+import edu.icesi.amelia.validation.cts.monitors.Monitor_7
+
+
+
+includes edu.icesi.amelia.validation.cts.subsystems.Compilation
+includes edu.icesi.amelia.validation.cts.subsystems.ExternalProbe
+includes edu.icesi.amelia.validation.cts.subsystems.Queue
+includes edu.icesi.amelia.validation.cts.subsystems.Consumers
+includes edu.icesi.amelia.validation.cts.subsystems.XmlProcessor
+includes edu.icesi.amelia.validation.cts.subsystems.Intermediate
+includes edu.icesi.amelia.validation.cts.subsystems.Server
+includes edu.icesi.amelia.validation.cts.subsystems.Apache
+includes edu.icesi.amelia.validation.cts.jmeter.JMeter_Report_4NO
+
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_1
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_2
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_3
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_4
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_5
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_6
+includes edu.icesi.amelia.validation.cts.monitors.Monitor_7
+
+
+deployment PC_12CO_4NO_5MB
+{	
+	
+	
+	//-------------------------------------------------------------------
+	//<Variables>
+	//-------------------------------------------------------------------
+	
+	//Bd Connection
+	val bdConnection = 1
+	
+	//Num components
+	val numComponents = 12
+	
+	//Num nodes
+	val numNodes = 4
+	
+	//JMeter MB
+	val jmeterMB = 5
+	
+	//Report directory
+	val String reportLocation = "/home/carvajal/Documents/new_Carvajal/REPORTE/"
+	
+	//-------------------------------------------------------------------
+	//</Variables>
+	//-------------------------------------------------------------------
+	
+	
+	//..................................................................................................................
+	
+	
+	//Consumers
+	val consumHost1 = new Host("hgrid1",21,22,"carvajal","hgrid18","Consum1")
+	val consumHost2 = new Host("hgrid4",21,22,"carvajal","hgrid18","Consum2")
+	val consumHost3 = new Host("hgrid5",21,22,"carvajal","hgrid18","Consum3")
+	val consumHost4 = new Host("hgrid6",21,22,"carvajal","hgrid18","Consum4")
+	
+	val consumerHosts = #[consumHost1,consumHost2,consumHost3,consumHost4]
+	
+	//..................................................................................................................
+	
+	//External Probe
+	val Host hostExternalProbe = new Host("hgrid17",21,22,"carvajal","hgrid18","ExternalProbe")
+	
+	//Queue
+	val queueHost = hostExternalProbe
+	
+	//Compilation
+	val compilationHost = hostExternalProbe
+	
+	//Server
+	val serverHost = new Host("hgrid16",21,22,"carvajal","hgrid18","Server")
+	
+	//XmlProcessor
+	val xmlPHost = serverHost
+	
+	//Intermediate
+	val intermHost = new Host("hgrid14",21,22,"carvajal","hgrid18","Intermediate")
+	
+	//Apache
+	val apacheHost = serverHost
+	
+	//-------------------------------------------------------------------
+	//<Associated Hosts (compilation)>
+	//-------------------------------------------------------------------
+	
+	val associatedHosts = (#[serverHost, queueHost, intermHost] + consumerHosts).toList
+	
+	//-------------------------------------------------------------------
+	//</Associated Hosts (compilation)>
+	//-------------------------------------------------------------------
+		
+	val deployHelper = new RetryableDeployment
+	
+	for(i: 1..1)
+	{
+		deployHelper.deploy([
+			 
+			add(new Compilation(numNodes,numComponents,bdConnection,compilationHost,associatedHosts))
+ 			add(new ExternalProbe(hostExternalProbe))
+			add(new Queue(queueHost))		
+			add(new Consumers(bdConnection, numComponents, consumerHosts)) 
+			add(new XmlProcessor(xmlPHost))
+			add(new Intermediate(numNodes,numComponents,intermHost))
+			add(new Server(serverHost))
+			add(new Apache(apacheHost))
+			
+			add(new Monitor_5(new Host("hgrid14",21,22,"carvajal","hgrid18","IntermediateM"),"interm"))
+			add(new Monitor_6(new Host("hgrid17",21,22,"carvajal","hgrid18","QueueM"),"queue"))
+			add(new Monitor_7(new Host("hgrid16",21,22,"carvajal","hgrid18","ServerM"),"server"))
+			add(new Monitor_1(new Host("hgrid1",21,22,"carvajal","hgrid18","Consum1M"),"consum1"))
+			add(new Monitor_2(new Host("hgrid4",21,22,"carvajal","hgrid18","Consum2M"),"consum2"))
+			add(new Monitor_3(new Host("hgrid5",21,22,"carvajal","hgrid18","Consum3M"),"consum3"))
+			add(new Monitor_4(new Host("hgrid6",21,22,"carvajal","hgrid18","Consum4M"),"consum4"))
+			
+			add(new JMeter_Report_4NO(jmeterMB,new Host("hgrid16",21,22,"carvajal","hgrid18","JMeterReport"),reportLocation,new Host("hgrid17",21,22,"carvajal","hgrid18","Report")))
+			
+			start(true)
+			
+		],1)
+	}
+	
+}

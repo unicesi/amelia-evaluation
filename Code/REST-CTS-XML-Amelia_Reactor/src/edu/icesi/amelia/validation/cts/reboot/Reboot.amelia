@@ -1,0 +1,29 @@
+package edu.icesi.amelia.validation.cts.reboot
+
+import java.util.Map
+import org.amelia.dsl.lib.descriptors.Host
+import org.amelia.dsl.lib.util.Hosts
+import java.util.List
+
+subsystem Reboot
+{
+	
+	//All available hosts
+	var Map<String, Host> allHosts = Hosts.hosts("/home/carvajal/Documents/LF_RIVERA/Workspace_Neon/REST-CTS-XML-Amelia_Reactor/src/hostsReboot.txt").toMap[h|h.identifier]
+	
+	//Reboot hosts
+	var List<Host> rebootHosts = #[
+		allHosts.get("grid1"),  allHosts.get("grid4"),
+		allHosts.get("grid5"), allHosts.get("grid6"), allHosts.get("grid7"), allHosts.get("grid8"),
+		allHosts.get("grid9"), allHosts.get("grid10"), allHosts.get("grid11"),
+		allHosts.get("grid13"), allHosts.get("grid14"), allHosts.get("grid16"),
+		allHosts.get("grid17"), allHosts.get("grid18"), allHosts.get("grid20")
+	]
+	
+	on rebootHosts
+	{
+		reboot:
+			cmd "reboot"
+	}
+	
+}

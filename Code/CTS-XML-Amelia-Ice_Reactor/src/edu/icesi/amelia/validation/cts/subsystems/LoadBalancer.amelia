@@ -1,0 +1,24 @@
+package edu.icesi.amelia.validation.cts.subsystems
+
+import org.amelia.dsl.lib.descriptors.Host
+import edu.icesi.amelia.validation.cts.classes.IceInteraction
+
+depends on ExternalProbe
+
+subsystem LoadBalancer
+{
+	param Host host
+	
+	on host
+	{
+		directory:
+			
+			cd "/home/carvajal/Documents/carvajal/jars/iceJars"
+		
+		executeLoadBalancer:directory;
+		
+			IceInteraction.runLoadBalancerIce("loadBalancer")
+	}
+	
+	
+}

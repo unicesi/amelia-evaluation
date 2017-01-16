@@ -1,0 +1,27 @@
+package edu.icesi.amelia.validation.cts.subsystems
+
+import org.amelia.dsl.lib.descriptors.Host
+import edu.icesi.amelia.validation.cts.classes.IceInteraction
+
+depends on XmlProcessor
+
+subsystem Intermediate
+{
+	
+	param Integer numNodes
+	param Integer numComponents
+	param Host hostIntermediate
+	
+	on hostIntermediate
+	{
+		directory:
+			cd "/home/carvajal/Documents/carvajal/jars/iceJars"
+		
+		executeInter:directory;
+		
+			IceInteraction.runIntermediateIce("intermediate_Control_" + numNodes + "_" + numComponents)
+				
+				
+	}
+	
+}

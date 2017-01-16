@@ -1,0 +1,1453 @@
+package edu.icesi.amelia.validation.cts.subsystems
+
+import org.amelia.dsl.lib.descriptors.Host
+
+depends on Queue
+
+includes Directory
+
+subsystem Consumers 
+{
+		
+		param Integer numCom
+		param Integer numNodes
+		
+		//4
+		param Host hgrid1
+		param Host hgrid18
+		param Host hgrid20
+		param Host hgrid4
+		
+		//8
+		param Host hgrid5
+		param Host hgrid6
+		param Host hgrid7
+		param Host hgrid8
+		
+		//12
+		param Host hgrid9
+		param Host hgrid10
+		param Host hgrid11
+		param Host hgrid12
+		
+		on hgrid1 
+		{
+			
+			eh11:directory;
+				run "procedimientos_familia1_1" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh12 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia1_2" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh13 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia1_3" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]	
+				
+			eh14 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia1_4" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh15 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia1_5" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh16 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia1_6" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh17 ? numCom == 12:directory;
+				run "procedimientos_familia1_7" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh18 ? numCom == 12:directory;
+				run "procedimientos_familia1_8" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh19 ? numCom == 12:directory;
+				run "procedimientos_familia1_9" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh110 ? numCom == 12:directory;
+				run "procedimientos_familia1_10" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh111 ? numCom == 12:directory;
+				run "procedimientos_familia1_11" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh112 ? numCom == 12:directory;
+				run "procedimientos_familia1_12" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+		}
+		
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		
+		on hgrid18 
+		{
+			
+			eh181:directory;
+				run "procedimientos_familia2_1" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh182 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia2_2" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh183 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia2_3" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]	
+				
+			eh184 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia2_4" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh185 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia2_5" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh186 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia2_6" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh187 ? numCom == 12:directory;
+				run "procedimientos_familia2_7" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh188 ? numCom == 12:directory;
+				run "procedimientos_familia2_8" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh189 ? numCom == 12:directory;
+				run "procedimientos_familia2_9" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh1810 ? numCom == 12:directory;
+				run "procedimientos_familia2_10" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh1811 ? numCom == 12:directory;
+				run "procedimientos_familia2_11" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh1812 ? numCom == 12:directory;
+				run "procedimientos_familia2_12" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+		}
+		
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		
+		on hgrid20 
+		{
+			
+			eh201:directory;
+				run "procedimientos_familia3_1" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh202 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia3_2" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh203 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia3_3" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]	
+				
+			eh204 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia3_4" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh205 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia3_5" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh206 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia3_6" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh207 ? numCom == 12:directory;
+				run "procedimientos_familia3_7" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh208 ? numCom == 12:directory;
+				run "procedimientos_familia3_8" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh209 ? numCom == 12:directory;
+				run "procedimientos_familia3_9" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh2010 ? numCom == 12:directory;
+				run "procedimientos_familia3_10" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh2011 ? numCom == 12:directory;
+				run "procedimientos_familia3_11" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh2012 ? numCom == 12:directory;
+				run "procedimientos_familia3_12" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+		}
+		
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		
+		on hgrid4 
+		{
+			
+			eh41:directory;
+				run "procedimientos_familia4_1" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh42 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia4_2" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh43 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia4_3" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]	
+				
+			eh44 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia4_4" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh45 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia4_5" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh46 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia4_6" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh47 ? numCom == 12:directory;
+				run "procedimientos_familia4_7" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh48 ? numCom == 12:directory;
+				run "procedimientos_familia4_8" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh49 ? numCom == 12:directory;
+				run "procedimientos_familia4_9" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh410 ? numCom == 12:directory;
+				run "procedimientos_familia4_10" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh411 ? numCom == 12:directory;
+				run "procedimientos_familia4_11" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh412 ? numCom == 12:directory;
+				run "procedimientos_familia4_12" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+		}
+		
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		
+		on hgrid5 ? numNodes == 8 || numNodes == 12 
+		{
+			
+			eh51:directory;
+				run "procedimientos_familia5_1" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh52 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia5_2" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh53 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia5_3" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]	
+				
+			eh54 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia5_4" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh55 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia5_5" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh56 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia5_6" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh57 ? numCom == 12:directory;
+				run "procedimientos_familia5_7" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh58 ? numCom == 12:directory;
+				run "procedimientos_familia5_8" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh59 ? numCom == 12:directory;
+				run "procedimientos_familia5_9" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh510 ? numCom == 12:directory;
+				run "procedimientos_familia5_10" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh511 ? numCom == 12:directory;
+				run "procedimientos_familia5_11" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh512 ? numCom == 12:directory;
+				run "procedimientos_familia5_12" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+		}
+		
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		
+		on hgrid6 ? numNodes == 8 || numNodes == 12 
+		{
+			
+			eh61:directory;
+				run "procedimientos_familia6_1" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh62 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia6_2" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh63 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia6_3" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]	
+				
+			eh64 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia6_4" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh65 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia6_5" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh66 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia6_6" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh67 ? numCom == 12:directory;
+				run "procedimientos_familia6_7" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh68 ? numCom == 12:directory;
+				run "procedimientos_familia6_8" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh69 ? numCom == 12:directory;
+				run "procedimientos_familia6_9" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh610 ? numCom == 12:directory;
+				run "procedimientos_familia6_10" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh611 ? numCom == 12:directory;
+				run "procedimientos_familia6_11" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh612 ? numCom == 12:directory;
+				run "procedimientos_familia6_12" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+		}
+		
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		
+		on hgrid7 ? numNodes == 8 || numNodes == 12  
+		{
+			
+			eh71:directory;
+				run "procedimientos_familia7_1" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh72 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia7_2" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh73 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia7_3" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]	
+				
+			eh74 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia7_4" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh75 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia7_5" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh76 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia7_6" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh77 ? numCom == 12:directory;
+				run "procedimientos_familia7_7" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh78 ? numCom == 12:directory;
+				run "procedimientos_familia7_8" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh79 ? numCom == 12:directory;
+				run "procedimientos_familia7_9" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh710 ? numCom == 12:directory;
+				run "procedimientos_familia7_10" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh711 ? numCom == 12:directory;
+				run "procedimientos_familia7_11" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh712 ? numCom == 12:directory;
+				run "procedimientos_familia7_12" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+		}
+		
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		
+		on hgrid8 ? numNodes == 8 || numNodes == 12 
+		{
+			
+			eh81:directory;
+				run "procedimientos_familia8_1" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh82 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia8_2" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh83 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia8_3" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]	
+				
+			eh84 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia8_4" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh85 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia8_5" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh86 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia8_6" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh87 ? numCom == 12:directory;
+				run "procedimientos_familia8_7" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh88 ? numCom == 12:directory;
+				run "procedimientos_familia8_8" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh89 ? numCom == 12:directory;
+				run "procedimientos_familia8_9" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh810 ? numCom == 12:directory;
+				run "procedimientos_familia8_10" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh811 ? numCom == 12:directory;
+				run "procedimientos_familia8_11" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh812 ? numCom == 12:directory;
+				run "procedimientos_familia8_12" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+		}
+		
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		
+		on hgrid9 ? numNodes == 12 
+		{
+			
+			eh91:directory;
+				run "procedimientos_familia9_1" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh92 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia9_2" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh93 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia9_3" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]	
+				
+			eh94 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia9_4" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh95 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia9_5" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh96 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia9_6" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh97 ? numCom == 12:directory;
+				run "procedimientos_familia9_7" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh98 ? numCom == 12:directory;
+				run "procedimientos_familia9_8" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh99 ? numCom == 12:directory;
+				run "procedimientos_familia9_9" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh910 ? numCom == 12:directory;
+				run "procedimientos_familia9_10" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh911 ? numCom == 12:directory;
+				run "procedimientos_familia9_11" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh912 ? numCom == 12:directory;
+				run "procedimientos_familia9_12" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+		}
+		
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		
+		on hgrid10 ? numNodes == 12 
+		{
+			
+			eh101:directory;
+				run "procedimientos_familia10_1" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh102 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia10_2" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh103 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia10_3" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]	
+				
+			eh104 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia10_4" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh105 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia10_5" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh106 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia10_6" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh107 ? numCom == 12:directory;
+				run "procedimientos_familia10_7" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh108 ? numCom == 12:directory;
+				run "procedimientos_familia10_8" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh109 ? numCom == 12:directory;
+				run "procedimientos_familia10_9" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh1010 ? numCom == 12:directory;
+				run "procedimientos_familia10_10" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh1011 ? numCom == 12:directory;
+				run "procedimientos_familia10_11" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh1012 ? numCom == 12:directory;
+				run "procedimientos_familia10_12" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+		}
+		
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		
+		on hgrid11 ? numNodes == 12  
+		{ 
+			
+			//eh111
+			e11h1:directory;
+				run "procedimientos_familia11_1" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+			//eh112	
+			e11h2 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia11_2" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh113 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia11_3" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]	
+				
+			eh114 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia11_4" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh115 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia11_5" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh116 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia11_6" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh117 ? numCom == 12:directory;
+				run "procedimientos_familia11_7" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh118 ? numCom == 12:directory;
+				run "procedimientos_familia11_8" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh119 ? numCom == 12:directory;
+				run "procedimientos_familia11_9" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh1110 ? numCom == 12:directory;
+				run "procedimientos_familia11_10" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh1111 ? numCom == 12:directory;
+				run "procedimientos_familia11_11" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh1112 ? numCom == 12:directory;
+				run "procedimientos_familia11_12" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+		}
+		
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------
+		
+		on hgrid12 ? numNodes == 12 
+		{
+			
+			eh121:directory;
+				run "procedimientos_familia12_1" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh122 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia12_2" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh123 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia12_3" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]	
+				
+			eh124 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia12_4" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh125 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia12_5" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh126 ? numCom == 6 || numCom == 12:directory;
+				run "procedimientos_familia12_6" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh127 ? numCom == 12:directory;
+				run "procedimientos_familia12_7" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh128 ? numCom == 12:directory;
+				run "procedimientos_familia12_8" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh129 ? numCom == 12:directory;
+				run "procedimientos_familia12_9" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh1210 ? numCom == 12:directory;
+				run "procedimientos_familia12_10" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh1211 ? numCom == 12:directory;
+				run "procedimientos_familia12_11" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+				
+			eh1212 ? numCom == 12:directory;
+				run "procedimientos_familia12_12" -libpath #[
+				"jars/xmlServerRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/xdb6.jar"
+				]
+			
+		}
+
+}

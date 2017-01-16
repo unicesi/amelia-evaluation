@@ -1,0 +1,51 @@
+package edu.icesi.amelia.validation.cts.subsystems
+
+import org.amelia.dsl.lib.descriptors.Host
+import java.util.List
+
+subsystem Compilation
+{
+	param Host host
+	param String codeSourcesFolder	
+	param List<Host> associatedHosts
+	param Boolean transmit
+	
+	on host
+	{
+		
+		directory:
+			
+			cd codeSourcesFolder
+		
+		compilation:directory;
+			
+			compile "Procedimientos_PDG_Reactor/Server/src" "Procedimientos_PDG_Reactor/jars/xmlServerReactor" -classpath #[
+				"Procedimientos_PDG/lib/vtd-xml.jar",
+				"Procedimientos_PDG/lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"Procedimientos_PDG/lib/new-personalized-events-with-carvajal.jar",
+				"Procedimientos_PDG/lib/ojdbc6.jar",
+				"Procedimientos_PDG/lib/javax.ws.rs-api-2.0.jar",
+				"Procedimientos_PDG/lib/commons-codec-1.10.jar",
+				"Procedimientos_PDG/lib/xdb6.jar"]
+				
+			compile "Monitoring/src" "monitoring" -classpath #[
+				"Monitoring/lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"Monitoring/lib/new-personalized-events-with-carvajal.jar",
+				"Monitoring/lib/slf4j-api-1.7.10.jar",
+				"Monitoring/lib/sigar.jar"]
+				
+		localCopy:compilation;
+		
+			cmd "cp -rf " + "Procedimientos_PDG_Reactor/jars " + "/home/carvajal/nfs/Carvajal/"
+			cmd "cp " + "monitoring.jar " + "/home/carvajal/nfs/Carvajal/jars"
+	}
+	
+	on associatedHosts ? transmit
+	{
+		remoteCopy:localCopy;
+		
+			cmd "cp -rf " + "/home/carvajal/nfs/Carvajal/jars " + "/home/carvajal/Documents/carvajal"
+			cmd "cp -rf " + "/home/carvajal/nfs/Carvajal/lib " + "/home/carvajal/Documents/carvajal" 
+	}
+	
+}

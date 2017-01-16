@@ -1,0 +1,78 @@
+package edu.icesi.amelia.validation.cts.subsystems;
+
+import java.util.List
+import org.amelia.dsl.lib.descriptors.Host
+import edu.icesi.amelia.validation.cts.classes.IceInteraction
+
+depends on Queue
+
+subsystem Consumers
+{
+	param Integer bdConnection	
+	param Integer numComponents
+	param List<Host> hosts
+	
+	on hosts
+	{
+		
+		directory:
+		
+			cd "/home/carvajal/Documents/carvajal/jars/iceJars"
+			
+		initialExecution:directory;
+		
+			IceInteraction.runSPProcessorIce("spProcessor_1_"+bdConnection)
+		
+		//--------------------------------------------------------------------------	
+		
+		execution6CO1 ? numComponents == 6 || numComponents == 12 :initialExecution;
+		
+			IceInteraction.runSPProcessorIce("spProcessor_2_" + bdConnection)
+			
+		execution6CO2 ? numComponents == 6 || numComponents == 12 :initialExecution;
+		
+			IceInteraction.runSPProcessorIce("spProcessor_3_" + bdConnection)
+			
+		execution6CO3 ? numComponents == 6 || numComponents == 12 :initialExecution;
+		
+			IceInteraction.runSPProcessorIce("spProcessor_4_" + bdConnection)
+			
+		execution6CO4 ? numComponents == 6 || numComponents == 12 :initialExecution;
+		
+			IceInteraction.runSPProcessorIce("spProcessor_5_" + bdConnection)
+			
+		execution6CO5 ? numComponents == 6 || numComponents == 12 :initialExecution;
+		
+			IceInteraction.runSPProcessorIce("spProcessor_6_" + bdConnection)
+			
+		//---------------------------------------------------------------------------
+		
+		execution12CO1 ? numComponents == 12:initialExecution;
+		
+			IceInteraction.runSPProcessorIce("spProcessor_7_" + bdConnection)
+			
+		execution12CO2 ? numComponents == 12:initialExecution;
+		
+			IceInteraction.runSPProcessorIce("spProcessor_8_" + bdConnection)
+			
+		execution12CO3 ? numComponents == 12:initialExecution;
+		
+			IceInteraction.runSPProcessorIce("spProcessor_9_" + bdConnection)
+			
+		execution12CO4 ? numComponents == 12:initialExecution;
+		
+			IceInteraction.runSPProcessorIce("spProcessor_10_" + bdConnection)
+			
+		execution12CO5 ? numComponents == 12:initialExecution;
+		
+			IceInteraction.runSPProcessorIce("spProcessor_11_" + bdConnection)
+			
+		execution12CO6 ? numComponents == 12:initialExecution;
+		
+			IceInteraction.runSPProcessorIce("spProcessor_12_" + bdConnection)
+		
+	}
+	
+
+	
+}

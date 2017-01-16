@@ -1,0 +1,557 @@
+package edu.icesi.amelia.validation.cts.subsystems
+
+import org.amelia.dsl.lib.descriptors.Host
+import java.util.List
+
+includes Directory
+
+depends on LoadBalancer
+
+subsystem StoreProcedures
+{
+	param Integer bdConnection
+	param Integer numCom
+	param Host hostSP1
+	param Host hostSP2
+	param Host hostSP3
+	param Host hostSP4
+	param Host hostSP5
+	param Host hostSP6
+	param Host hostSP7
+	param Host hostSP8
+	param Host hostSP9
+	param Host hostSP10
+	param Host hostSP11
+	param Host hostSP12
+
+	var List<Host> exec6CO1 = #[hostSP1,hostSP3,hostSP10,hostSP11,hostSP7,hostSP4]
+	var List<Host> exec6CO2 = #[hostSP2,hostSP9,hostSP6,hostSP12,hostSP8,hostSP5]
+	var List<Host> exec12CO = (exec6CO1 + exec6CO2).toList
+
+	on hostSP1 ? numCom == 1
+	{
+		
+		execution1CO1:directory;
+		
+			run "asignaParentesco_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	on hostSP2 ? numCom == 1
+	{
+		execution2CO1:directory;
+		
+			run "verificacion_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	on hostSP3 ? numCom == 1
+	{
+		execution3CO1:directory;
+		
+			run "actualizaSesion_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	on hostSP4 ? numCom == 1
+	{
+		execution4CO1:directory;
+		
+			run "borradoIntegrante_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	on hostSP5 ? numCom == 1
+	{
+		execution5CO1:directory;
+		
+			run "calificacionRiesgo_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	on hostSP6 ? numCom == 1
+	{
+		execution6CO1:directory;
+		
+			run "caracteristicas_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	on hostSP7 ? numCom == 1
+	{
+		execution7CO1:directory;
+		
+			run "generarEliminacion_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	on hostSP8 ? numCom == 1
+	{
+		execution8CO1:directory;
+		
+			run "generarInsert_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	on hostSP9 ? numCom == 1
+	{
+		execution9CO1:directory;
+		
+			run "modFamilias_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	on hostSP10 ? numCom == 1
+	{
+		execution10CO1:directory;
+		
+			run "salidaIntegrantes_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	on hostSP11 ? numCom == 1
+	{
+		execution11CO1:directory;
+		
+			run "sentenciaFolio_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	on hostSP12 ? numCom == 1
+	{
+		execution12CO1:directory;
+		
+			run "sentenciaUpsWhere_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	//--------------------------------------------------------------------------------
+	
+	
+	on exec6CO1 ? numCom == 6
+	{
+		
+		execution1CO61:directory;
+		
+			run "asignaParentesco_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution2CO61:directory;
+		
+			run "verificacion_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution3CO61:directory;
+		
+			run "actualizaSesion_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution4CO61:directory;
+		
+			run "modFamilias_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution5CO61:directory;
+		
+			run "salidaIntegrantes_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+		
+		execution6CO61:directory;
+		
+			run "caracteristicas_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+	}
+	
+	on exec6CO2 ? numCom == 6
+	{
+		execution1CO62:directory;
+		
+			run "sentenciaFolio_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution2CO62:directory;
+		
+			run "sentenciaUpsWhere_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution3CO62:directory;
+		
+			run "generarEliminacion_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution4CO62:directory;
+		
+			run "generarInsert_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution5CO62:directory;
+		
+			run "borradoIntegrante_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution6CO62:directory;
+		
+			run "calificacionRiesgo_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+		
+	}
+	
+	
+	//--------------------------------------------------------------------------------
+	
+	
+	on exec12CO ? numCom == 12
+	{
+			
+			execution1CO12:directory;
+		
+			run "asignaParentesco_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution2CO12:directory;
+		
+			run "verificacion_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution3CO12:directory;
+		
+			run "actualizaSesion_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution4CO12:directory;
+		
+			run "borradoIntegrante_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution5CO12:directory;
+		
+			run "calificacionRiesgo_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution6CO12:directory;
+		
+			run "caracteristicas_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution7CO12:directory;
+		
+			run "generarEliminacion_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution8CO12:directory;
+		
+			run "generarInsert_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution9CO12:directory;
+		
+			run "modFamilias_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution10CO12:directory;
+		
+			run "salidaIntegrantes_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution11CO12:directory;
+		
+			run "sentenciaFolio_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]
+				
+		execution12CO12:directory;
+		
+			run "sentenciaUpsWhere_"+bdConnection -libpath #[
+				"jars/xmlServerReactor.jar",
+				"lib/vtd-xml.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar",
+				"lib/ojdbc6.jar",
+				"lib/javax.ws.rs-api-2.0.jar",
+				"lib/commons-codec-1.10.jar",
+				"lib/xdb6.jar"
+				]	
+	}
+	
+	
+	
+}

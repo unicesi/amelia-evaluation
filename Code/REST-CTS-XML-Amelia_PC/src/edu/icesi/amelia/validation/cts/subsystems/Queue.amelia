@@ -1,0 +1,26 @@
+package edu.icesi.amelia.validation.cts.subsystems
+
+import org.amelia.dsl.lib.descriptors.Host
+
+depends on Compilation
+
+subsystem Queue 
+{
+	
+	param Host host
+	
+	on host
+	{
+		
+		directory:
+			cd "/home/carvajal/Documents/carvajal"
+		
+		execute:directory;
+			
+			run "procedimientos_queue" -libpath #[
+				"jars/xmlQueueRest.jar",
+				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
+				"lib/new-personalized-events-with-carvajal.jar"]	
+	}
+	
+}
