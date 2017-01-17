@@ -5,11 +5,12 @@ import org.amelia.dsl.lib.descriptors.Host
 import org.amelia.dsl.lib.util.Hosts
 import java.util.List
 
-subsystem Reboot
-{
+subsystem Reboot {
 	
 	//All available hosts
-	var Map<String, Host> allHosts = Hosts.hosts("/home/carvajal/Documents/LF_RIVERA/Workspace_Mars2/CTS-XML-Amelia-Ice_Reactor/src/hostsReboot.txt").toMap[h|h.identifier]
+	var Map<String, Host> allHosts = 
+		Hosts.hosts("/home/carvajal/Documents/LF_RIVERA/Workspace_Mars2/CTS-XML-Amelia-Ice_Reactor/src/hostsReboot.txt")
+			 .toMap[h|h.identifier]
 	
 	//Reboot hosts
 	var List<Host> rebootHosts = #[
@@ -20,8 +21,7 @@ subsystem Reboot
 		allHosts.get("grid17"), allHosts.get("grid18"), allHosts.get("grid20")
 	]
 	
-	on rebootHosts
-	{
+	on rebootHosts {
 		reboot:
 			cmd "reboot"
 	}

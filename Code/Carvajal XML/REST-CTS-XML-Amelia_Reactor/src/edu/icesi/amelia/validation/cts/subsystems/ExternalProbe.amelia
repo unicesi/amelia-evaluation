@@ -4,13 +4,11 @@ import org.amelia.dsl.lib.descriptors.Host
 
 depends on Compilation
 
-subsystem ExternalProbe
-{
+subsystem ExternalProbe {
 
 	param Host host
 	
-	on host
-	{
+	on host {
 		directory:
 			cd "/home/carvajal/Documents/carvajal"
 		execution:directory;

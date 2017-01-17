@@ -5,19 +5,15 @@ import edu.icesi.amelia.validation.cts.classes.IceInteraction
 
 depends on Compilation
 
-subsystem ExternalProbe
-{
+subsystem ExternalProbe {
 
 	param Host host
 	
-	on host
-	{
+	on host {
 		directory:
-			
 			cd "/home/carvajal/Documents/carvajal/jars/iceJars"
 		
-		execution:directory;
-		
+		execution: directory;
 			IceInteraction.runExternalProbeIce("external_probe")
 	}
 	

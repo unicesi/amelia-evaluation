@@ -5,13 +5,11 @@ import org.amelia.dsl.lib.descriptors.Host
 
 depends on LoadBalancer
 
-subsystem Directory
-{
+subsystem Directory {
 	
 	param List<Host> spHosts
 	
-	on spHosts
-	{
+	on spHosts {
 		directory:
 			cd "/home/carvajal/Documents/carvajal/"
 	}

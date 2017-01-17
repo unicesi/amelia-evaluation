@@ -4,21 +4,18 @@ import org.amelia.dsl.lib.descriptors.Host
 
 depends on Server
 
-subsystem Apache
-{
+subsystem Apache {
+	
 	var String apacheDirectory = "/opt/apache-tomcat-7.0.34/bin"
 	var String apacheCommand = "./startup.sh"
+	
 	param Host hostApache
 	
-	on hostApache
-	{
-		directory:
-			
+	on hostApache {
+		directory:	
 			cd apacheDirectory
-			
-			
-		execution:directory;
-		
+				
+		execution: directory;
 			cmd apacheCommand
 	}
 }

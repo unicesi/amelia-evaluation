@@ -10,72 +10,44 @@ subsystem Compilation
 	param Host compilationHost
 	param List<Host> associatedHosts
 	
-	on compilationHost
-	{
-		
+	on compilationHost {
 		removeIceJars:
-			
 			cmd "rm -Rf /home/carvajal/nfs/Carvajal/jars/iceJars"
 			cmd "mkdir /home/carvajal/nfs/Carvajal/jars/iceJars"
 		
-		directoryMonitoring:removeIceJars;
-		
+		directoryMonitoring: removeIceJars;
 			cd "/home/carvajal/nfs/Carvajal/sourcecode/Monitoring_Ice/monitoring/"
 			
 		compilationMonitoring:directoryMonitoring;
-		
 			IceInteraction.compileIce("external_probe")
-			
 			IceInteraction.compileIce("monitor")
-			
 			IceInteraction.compileIce("reporter")		
 		
-		
-		directoryIce:compilationMonitoring;
-			
+		directoryIce: compilationMonitoring;
 			cd "/home/carvajal/nfs/Carvajal/sourcecode/PDG-Reactor/ReactorIce/"
 			
-		iceCompilation:directoryIce;
-			
+		iceCompilation: directoryIce;
 			IceInteraction.compileIce("server")
-			
 			IceInteraction.compileIce("bridgeXml_12_" + numComponents)
-			
 			IceInteraction.compileIce("loadBalancer")
-			
 			//------------------------------------------
-			
 			IceInteraction.compileIce("actualizaSesion")
-			
 			IceInteraction.compileIce("asignaParentesco")
-			
 			IceInteraction.compileIce("borradoIntegrante")
-			
 			IceInteraction.compileIce("calificacionRiesgo")
-			
 			IceInteraction.compileIce("generarEliminacion")
-			
 			IceInteraction.compileIce("generarInsert")
-			
 			IceInteraction.compileIce("salidaIntegrantes")
-			
 			IceInteraction.compileIce("sentenciaFolio")
-			
 			IceInteraction.compileIce("sentenciaInsertUpdWhere")
-			
 			IceInteraction.compileIce("uspCaracteristicas")
-			
 			IceInteraction.compileIce("uspModFamilias")
-			
 			IceInteraction.compileIce("uspVerificacion")
-			
-									
+											
 	}
 	
-	on associatedHosts
-	{
-		remoteCopy:iceCompilation;
-		
+	on associatedHosts {
+		remoteCopy: iceCompilation;
 			cmd "rm -Rf /home/carvajal/Documents/carvajal/jars/iceJars"
 			cmd "cp -rf " + "/home/carvajal/nfs/Carvajal/jars " + "/home/carvajal/Documents/carvajal"
 			cmd "cp -rf " + "/home/carvajal/nfs/Carvajal/lib " + "/home/carvajal/Documents/carvajal" 

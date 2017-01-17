@@ -23,10 +23,7 @@ includes edu.icesi.amelia.validation.cts.subsystems.Apache
 includes edu.icesi.amelia.validation.cts.subsystems.JMeter_Report_12NO
 includes edu.icesi.amelia.validation.cts.subsystems.Monitors
 
-
-
-deployment R_12CO_12NO_1MB
-{	
+deployment R_12CO_12NO_1MB {	
 	
 	//-------------------------------------------------------------------
 	//<Variables>
@@ -38,14 +35,7 @@ deployment R_12CO_12NO_1MB
 	//JMeter MB
 	val jmeterMB = 1
 	
-	
-	//-------------------------------------------------------------------
-	//</Variables>
-	//-------------------------------------------------------------------
-	
-	
-	//..................................................................................................................
-	
+	//.........................................................................
 	
 	//SPs
 	val spHost1 = new Host("hgrid1",21,22,"carvajal","hgrid18","sp1")
@@ -65,7 +55,7 @@ deployment R_12CO_12NO_1MB
 	
 	val spHosts = #[spHost1,spHost2,spHost3,spHost4,spHost5,spHost6,spHost7,spHost8,spHost9,spHost10,spHost11,spHost12]
 	
-	//..................................................................................................................
+	//.........................................................................
 	
 	//Compilation
 	val compilationHost =  new Host("hgrid17",21,22,"carvajal","hgrid18","Compilation")
@@ -103,32 +93,36 @@ deployment R_12CO_12NO_1MB
 	{
 		deployHelper.deploy([
 			 
-			add(new Compilation(numComponents,compilationHost,associatedHosts))
+			add(new Compilation(numComponents, compilationHost, associatedHosts))
  			add(new ExternalProbe(hostExternalProbe))	
 			add(new LoadBalancer(hostLoadBalancer))
-			add(new StoreProcedures(numComponents,spHost1,spHost2,spHost3,spHost4,spHost5,spHost6,spHost7,spHost8,spHost9,spHost10,spHost11,spHost12, spHosts))
-			add(new Bridge(numComponents,bridgeHost))
+			add(new StoreProcedures(numComponents, spHost1, spHost2, spHost3,spHost4, spHost5, spHost6, spHost7, spHost8, spHost9, spHost10, spHost11, spHost12,  spHosts))
+			add(new Bridge(numComponents, bridgeHost))
 			add(new Server(serverHost))
 			add(new Apache(apacheHost))
 			
-			add(new Monitors(new Host("hgrid16",21,22,"carvajal","hgrid18","IntermediateM"),"BridgeServerLoadBalancer"))
+			add(new Monitors(new Host("hgrid16", 21, 22, "carvajal", "hgrid18", "IntermediateM"), "BridgeServerLoadBalancer"))
 			
-			add(new Monitors(new Host("hgrid1",21,22,"carvajal","hgrid18","sp1M"),"sp1"))
-			add(new Monitors(new Host("hgrid18",21,22,"carvajal","hgrid18","sp2M"),"sp2"))
-			add(new Monitors(new Host("hgrid20",21,22,"carvajal","hgrid18","sp3M"),"sp3"))
-			add(new Monitors(new Host("hgrid11",21,22,"carvajal","hgrid18","sp4M"),"sp4"))
+			add(new Monitors(new Host("hgrid1", 21, 22, "carvajal", "hgrid18", "sp1M"), "sp1"))
+			add(new Monitors(new Host("hgrid18", 21, 22, "carvajal", "hgrid18", "sp2M"), "sp2"))
+			add(new Monitors(new Host("hgrid20", 21, 22, "carvajal", "hgrid18", "sp3M"), "sp3"))
+			add(new Monitors(new Host("hgrid11", 21, 22, "carvajal", "hgrid18", "sp4M"), "sp4"))
 			
-			add(new Monitors(new Host("hgrid13",21,22,"carvajal","hgrid18","sp5M"),"sp5"))
-			add(new Monitors(new Host("hgrid6",21,22,"carvajal","hgrid18","sp6M"),"sp6"))
-			add(new Monitors(new Host("hgrid9",21,22,"carvajal","hgrid18","sp7M"),"sp7"))
-			add(new Monitors(new Host("hgrid10",21,22,"carvajal","hgrid18","sp8M"),"sp8"))
+			add(new Monitors(new Host("hgrid13", 21, 22, "carvajal", "hgrid18", "sp5M"), "sp5"))
+			add(new Monitors(new Host("hgrid6", 21, 22, "carvajal", "hgrid18", "sp6M"), "sp6"))
+			add(new Monitors(new Host("hgrid9", 21, 22, "carvajal", "hgrid18", "sp7M"), "sp7"))
+			add(new Monitors(new Host("hgrid10", 21, 22, "carvajal", "hgrid18", "sp8M"), "sp8"))
 			
-			add(new Monitors(new Host("hgrid4",21,22,"carvajal","hgrid18","sp9M"),"sp9"))
-			add(new Monitors(new Host("hgrid5",21,22,"carvajal","hgrid18","sp10M"),"sp10"))
-			add(new Monitors(new Host("hgrid7",21,22,"carvajal","hgrid18","sp11M"),"sp11"))
-			add(new Monitors(new Host("hgrid8",21,22,"carvajal","hgrid18","sp12M"),"sp12"))
+			add(new Monitors(new Host("hgrid4", 21, 22, "carvajal", "hgrid18", "sp9M"), "sp9"))
+			add(new Monitors(new Host("hgrid5", 21, 22, "carvajal", "hgrid18", "sp10M"), "sp10"))
+			add(new Monitors(new Host("hgrid7", 21, 22, "carvajal", "hgrid18", "sp11M"), "sp11"))
+			add(new Monitors(new Host("hgrid8", 21, 22, "carvajal", "hgrid18", "sp12M"), "sp12"))
 			
-			add(new JMeter_Report_12NO(jmeterMB,new Host("hgrid16",21,22,"carvajal","hgrid18","JMeter"),new Host("hgrid17",21,22,"carvajal","hgrid18","Report")))
+			add(new JMeter_Report_12NO(
+				jmeterMB,
+				new Host("hgrid16", 21, 22, "carvajal", "hgrid18", "JMeter"),
+				new Host("hgrid17", 21, 22, "carvajal", "hgrid18", "Report")
+			))
 			
 			start(true)
 			

@@ -5,18 +5,16 @@ import edu.icesi.amelia.validation.cts.classes.IceInteraction
 
 depends on Apache
 
-subsystem Monitors
-{
+subsystem Monitors {
+	
 	param Host host
 	param String name  
 	
-	on host
-	{
+	on host {
 		directory:
 			cd "/home/carvajal/Documents/carvajal/jars/iceJars"
 			
-		execute:directory;
-
+		execute: directory;
 			IceInteraction.runMonitorIce(name)
 	}
 	

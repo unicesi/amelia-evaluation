@@ -5,18 +5,15 @@ import edu.icesi.amelia.validation.cts.classes.IceInteraction
 
 depends on ExternalProbe
 
-subsystem LoadBalancer
-{
+subsystem LoadBalancer {
+	
 	param Host host
 	
-	on host
-	{
+	on host {
 		directory:
-			
 			cd "/home/carvajal/Documents/carvajal/jars/iceJars"
 		
-		executeLoadBalancer:directory;
-		
+		executeLoadBalancer: directory;
 			IceInteraction.runLoadBalancerIce("loadBalancer")
 	}
 	

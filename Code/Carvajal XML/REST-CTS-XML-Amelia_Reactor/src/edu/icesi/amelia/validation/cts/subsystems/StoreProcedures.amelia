@@ -2,13 +2,12 @@ package edu.icesi.amelia.validation.cts.subsystems
 
 import org.amelia.dsl.lib.descriptors.Host
 
-
 includes Directory
 
 depends on LoadBalancer
 
-subsystem StoreProcedures
-{
+subsystem StoreProcedures {
+	
 	param Integer bdConnection
 	param Integer numCom
 	param Host hostSP1

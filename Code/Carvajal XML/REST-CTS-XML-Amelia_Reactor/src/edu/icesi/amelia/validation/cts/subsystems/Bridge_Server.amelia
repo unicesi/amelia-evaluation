@@ -4,22 +4,17 @@ import org.amelia.dsl.lib.descriptors.Host
 
 depends on StoreProcedures
 
-subsystem Bridge_Server
-{
+subsystem Bridge_Server {
 	
 	param Host host
 	param Integer numComponents
 	
-	on host
-	{
-		
+	on host {
 		directory:
-			
 			cd "/home/carvajal/Documents/carvajal/"
 		
-		executeBridge:directory;
-		
-			run "procedimientos_bridge_"+12+"_"+numComponents -libpath #[
+		executeBridge: directory;
+			run 'procedimientos_bridge_«12»_«numComponents»' -libpath #[
 				"jars/xmlServerReactorRest.jar",
 				"lib/vtd-xml.jar",
 				"lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar",
@@ -30,8 +25,7 @@ subsystem Bridge_Server
 				"lib/xdb6.jar"
 				] //... => [withoutTimeout]
 				
-		executeServer:executeBridge;
-			
+		executeServer: executeBridge;
 			run "procedimientos_server" -libpath #[
 				"jars/xmlServerReactorRest.jar",
 				"lib/vtd-xml.jar",
@@ -42,7 +36,6 @@ subsystem Bridge_Server
 				"lib/commons-codec-1.10.jar",
 				"lib/xdb6.jar"
 			]
-
 	}
 	
 }

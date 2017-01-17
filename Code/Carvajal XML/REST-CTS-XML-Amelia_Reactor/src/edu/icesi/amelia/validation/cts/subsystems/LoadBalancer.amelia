@@ -4,18 +4,14 @@ import org.amelia.dsl.lib.descriptors.Host
 
 depends on ExternalProbe
 
-subsystem LoadBalancer
-{
+subsystem LoadBalancer {
 	param Host host
 	
-	on host
-	{
+	on host {
 		directory:
-			
 			cd "/home/carvajal/Documents/carvajal/"
 		
-		executeLoadBalancer:directory;
-		
+		executeLoadBalancer: directory;
 			run "loadBalancer" -libpath #[
 				"jars/xmlServerReactorRest.jar",
 				"lib/vtd-xml.jar",
@@ -25,7 +21,7 @@ subsystem LoadBalancer
 				"lib/javax.ws.rs-api-2.0.jar",
 				"lib/commons-codec-1.10.jar",
 				"lib/xdb6.jar"
-				]
+			]
 	}
 	
 	

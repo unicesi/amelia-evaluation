@@ -5,8 +5,8 @@ import edu.icesi.amelia.validation.cts.classes.IceInteraction
 
 depends on Monitors
 
-subsystem JMeter_Report_12NO
-{
+subsystem JMeter_Report_12NO {
+	
 	var String meterfileName = "XML-REST-" + jmeterMB + "MB_Ice.jmx"
 	var String reportLoc = "/home/carvajal/Documents/new_Carvajal/REPORTE/"
 	
@@ -14,25 +14,21 @@ subsystem JMeter_Report_12NO
 	param Host hostJmeter
 	param Host hostRabbit
 	
-	on hostJmeter
-	{
+	on hostJmeter {
 		jMeterDirectory:
 			cd "/home/carvajal/Documents/carvajal/apache-jmeter-2.13/bin"
 		
-		call:jMeterDirectory;
-			cmd "./jmeter -n -t " + "/home/carvajal/Documents/carvajal/ArchivosJmeterXML/"+meterfileName ... => [withoutTimeout]
-			
+		call: jMeterDirectory;
+			cmd "./jmeter -n -t " + "/home/carvajal/Documents/carvajal/ArchivosJmeterXML/" + meterfileName... => [
+				withoutTimeout
+			]
 	}
 	
-	on hostRabbit
-	{
-		directory:call;
-			
+	on hostRabbit {
+		directory: call;
 			cd "/home/carvajal/Documents/carvajal/jars"
 		
-		report:directory;
-			
+		report: directory;
 			IceInteraction.runReporterIce("reporter")
 	}
-	
 }

@@ -5,20 +5,15 @@ import edu.icesi.amelia.validation.cts.classes.IceInteraction
 
 depends on Bridge
 
-subsystem Server
-{
+subsystem Server {
+	
 	param Host hostServer
 	
-	on hostServer
-	{
+	on hostServer {
 		directory:
 			cd "/home/carvajal/Documents/carvajal/jars/iceJars"
 		
-		executeInter:directory;
-		
+		executeInter: directory;
 			IceInteraction.runServerIce("server")
-				
-				
 	}
-	
 }
