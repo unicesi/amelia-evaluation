@@ -7,7 +7,7 @@ depends on Monitors
 
 subsystem JMeter_Report_12NO {
 	
-	var String meterfileName = "XML-REST-" + jmeterMB + "MB_Ice.jmx"
+	var String meterfileName = 'XML-REST-«jmeterMB»MB_Ice.jmx'
 	var String reportLoc = "/home/carvajal/Documents/new_Carvajal/REPORTE/"
 	
 	param Integer jmeterMB
@@ -19,7 +19,7 @@ subsystem JMeter_Report_12NO {
 			cd "/home/carvajal/Documents/carvajal/apache-jmeter-2.13/bin"
 		
 		call: jMeterDirectory;
-			cmd "./jmeter -n -t " + "/home/carvajal/Documents/carvajal/ArchivosJmeterXML/" + meterfileName... => [
+			cmd './jmeter -n -t /home/carvajal/Documents/carvajal/ArchivosJmeterXML/«meterfileName»'... => [
 				withoutTimeout
 			]
 	}

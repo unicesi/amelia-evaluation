@@ -49,8 +49,8 @@ subsystem Compilation
 	on associatedHosts {
 		remoteCopy: iceCompilation;
 			cmd "rm -Rf /home/carvajal/Documents/carvajal/jars/iceJars"
-			cmd "cp -rf " + "/home/carvajal/nfs/Carvajal/jars " + "/home/carvajal/Documents/carvajal"
-			cmd "cp -rf " + "/home/carvajal/nfs/Carvajal/lib " + "/home/carvajal/Documents/carvajal" 
+			cmd "cp -rf /home/carvajal/nfs/Carvajal/jars /home/carvajal/Documents/carvajal"
+			cmd "cp -rf /home/carvajal/nfs/Carvajal/lib /home/carvajal/Documents/carvajal" 
 	}
 	
 	
