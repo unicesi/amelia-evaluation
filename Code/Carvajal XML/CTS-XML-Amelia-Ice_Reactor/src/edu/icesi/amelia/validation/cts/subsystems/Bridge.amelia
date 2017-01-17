@@ -15,7 +15,7 @@ subsystem Bridge {
 			cd "/home/carvajal/Documents/carvajal/jars/iceJars"
 		
 		executeInter: directory;
-			IceInteraction.runBridgeIce("bridgeXml_12_" + numComponents)	
+			IceInteraction.runBridgeIce('bridgeXml_12_«numComponents»')	
 	}
 	
 }

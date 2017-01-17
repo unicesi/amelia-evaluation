@@ -88,8 +88,7 @@ subsystem StoreProcedures {
 			IceInteraction.runSPIce("sentenciaInsertUpdWhere")
 	}
 	
-	//--------------------------------------------------------------------------------
-	
+	//-------------------------------------------------------------------------
 	
 	on exec6CO1 ? numCom == 6 {
 		execution1CO61: directory;
@@ -131,9 +130,7 @@ subsystem StoreProcedures {
 			IceInteraction.runSPIce("calificacionRiesgo")
 	}
 	
-	
-	//--------------------------------------------------------------------------------
-	
+	//-------------------------------------------------------------------------
 	
 	on exec12CO ? numCom == 12 {
 			execution1CO12: directory;
@@ -172,7 +169,4 @@ subsystem StoreProcedures {
 		execution12CO12: directory;
 			IceInteraction.runSPIce("sentenciaInsertUpdWhere")
 	}
-	
-	
-	
 }
