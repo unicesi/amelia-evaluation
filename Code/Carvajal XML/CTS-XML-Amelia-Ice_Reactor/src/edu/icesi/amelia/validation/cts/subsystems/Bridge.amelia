@@ -17,5 +17,4 @@ subsystem Bridge {
 		executeInter: directory;
 			IceInteraction.runBridgeIce('bridgeXml_12_«numComponents»')	
 	}
-	
 }

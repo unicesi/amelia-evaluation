@@ -4,8 +4,8 @@ import org.amelia.dsl.lib.descriptors.Host
 import java.util.List
 import edu.icesi.amelia.validation.cts.classes.IceInteraction
 
-subsystem Compilation
-{
+subsystem Compilation {
+
 	param Integer numComponents
 	param Host compilationHost
 	param List<Host> associatedHosts
@@ -42,8 +42,7 @@ subsystem Compilation
 			IceInteraction.compileIce("sentenciaInsertUpdWhere")
 			IceInteraction.compileIce("uspCaracteristicas")
 			IceInteraction.compileIce("uspModFamilias")
-			IceInteraction.compileIce("uspVerificacion")
-											
+			IceInteraction.compileIce("uspVerificacion")		
 	}
 	
 	on associatedHosts {
@@ -52,6 +51,4 @@ subsystem Compilation
 			cmd "cp -rf /home/carvajal/nfs/Carvajal/jars /home/carvajal/Documents/carvajal"
 			cmd "cp -rf /home/carvajal/nfs/Carvajal/lib /home/carvajal/Documents/carvajal" 
 	}
-	
-	
 }

@@ -17,5 +17,4 @@ subsystem Monitors {
 		execute: directory;
 			IceInteraction.runMonitorIce(name)
 	}
-	
 }

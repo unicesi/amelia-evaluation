@@ -16,5 +16,4 @@ subsystem ExternalProbe {
 		execution: directory;
 			IceInteraction.runExternalProbeIce("external_probe")
 	}
-	
 }

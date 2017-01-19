@@ -16,6 +16,4 @@ subsystem LoadBalancer {
 		executeLoadBalancer: directory;
 			IceInteraction.runLoadBalancerIce("loadBalancer")
 	}
-	
-	
 }

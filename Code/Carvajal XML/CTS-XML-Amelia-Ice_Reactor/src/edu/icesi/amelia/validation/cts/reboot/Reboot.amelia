@@ -25,5 +25,4 @@ subsystem Reboot {
 		reboot:
 			cmd "reboot"
 	}
-	
 }

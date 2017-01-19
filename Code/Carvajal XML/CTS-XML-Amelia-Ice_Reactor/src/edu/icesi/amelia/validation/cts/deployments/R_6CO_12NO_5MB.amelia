@@ -23,10 +23,7 @@ includes edu.icesi.amelia.validation.cts.subsystems.Apache
 includes edu.icesi.amelia.validation.cts.subsystems.JMeter_Report_12NO
 includes edu.icesi.amelia.validation.cts.subsystems.Monitors
 
-
-
-deployment R_6CO_12NO_5MB
-{	
+deployment R_6CO_12NO_5MB {	
 	
 	//-------------------------------------------------------------------
 	//<Variables>
@@ -134,5 +131,4 @@ deployment R_6CO_12NO_5MB
 			
 		],1)
 	}
-	
 }
