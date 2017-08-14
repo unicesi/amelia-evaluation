@@ -1,0 +1,51 @@
+package co.edu.icesi.driso.matrices
+
+import java.util.Map
+import org.amelia.dsl.lib.descriptors.Host
+import java.util.List
+
+subsystem Common
+{
+	
+	//All host.
+	param Map<String, Host> hosts
+	
+	//------------------------------------------------------------------------------------------------------------
+	//<compilationParams>
+	//------------------------------------------------------------------------------------------------------------
+	
+	// Compilation host.
+	var Host compilationHost = hosts.get("grid0");
+	
+	//Sources to compile.
+	var String commonSources = "/home/sas1/LF_RIVERA/workspace-matrices/org.driso.matrices.common";
+	var String blockRSources = "/home/sas1/LF_RIVERA/workspace-matrices/org.driso.matrices.blockreduce";
+	var String hybridSources = "/home/sas1/LF_RIVERA/workspace-matrices/org.driso.matrices.hybrid_multiplication";
+	var String nMatricesSources = "/home/sas1/LF_RIVERA/workspace-matrices/org.driso.matrices.nmatrices";
+	var String strassenSources = "/home/sas1/LF_RIVERA/workspace-matrices/org.driso.matrices.strassen";
+	//Compilation sources.
+	var List<String> sources = #[commonSources,blockRSources,hybridSources,nMatricesSources,strassenSources];
+	
+	//Built sources folder (The site where compilation artifacts are located.)
+	var String builtFolder = "/home/sas1/LF_RIVERA/workspace-matrices/built-sources";
+	
+	//------------------------------------------------------------------------------------------------------------
+	//</compilationParams>
+	//------------------------------------------------------------------------------------------------------------
+	
+	//------------------------------------------------------------------------------------------------------------
+	//<allocationParams>
+	//------------------------------------------------------------------------------------------------------------
+	
+	//The folder in the execution nodes where artifacts are allocated.
+	var String allocationTargetFolder = "/home/sas1/";
+	
+	//Target sources folder in the execution nodes (The site where the jars are executed.).
+	var String builtsFolder = allocationTargetFolder + "built-sources";
+	
+	//------------------------------------------------------------------------------------------------------------
+	//</allocationParams>
+	//------------------------------------------------------------------------------------------------------------
+	
+	
+}

@@ -1,0 +1,50 @@
+package co.edu.icesi.driso.matrices
+
+includes Common
+
+subsystem Compile
+{
+	param Integer strategy
+	
+	on compilationHost
+	{	 
+		compileCommon:
+			cd sources.get(0)
+			compile "src" "mcm-common"
+			cmd "yes | cp -f mcm-common.jar " + builtFolder + "/"
+	}
+	
+	on compilationHost ? strategy == 1
+	{
+		strategy1:compileCommon;
+			cd sources.get(1)
+			compile "src" "mcm-blockreduce" -classpath builtFolder + "/mcm-common.jar"
+			cmd "yes | cp -f mcm-blockreduce.jar " + builtFolder
+	}
+	
+	on compilationHost ? strategy == 2
+	{
+		strategy2:compileCommon;
+			cd sources.get(2)
+			compile "src" "mcm-hybrid-multiplication" -classpath builtFolder + "/mcm-common.jar"
+			cmd "yes | cp -f mcm-hybrid-multiplication.jar " + builtFolder
+	}
+	
+	on compilationHost ? strategy == 3
+	{
+		strategy3:compileCommon;
+			cd sources.get(3)
+			compile "src" "mcm-nmatrices" -classpath builtFolder + "/mcm-common.jar"
+			cmd "yes | cp -f mcm-nmatrices.jar " + builtFolder
+	}
+	
+	on compilationHost ? strategy == 4
+	{
+		strategy4:compileCommon;
+			cd sources.get(4)
+			compile "src" "mcm-strassen" -classpath builtFolder + "/mcm-common.jar"
+			cmd "yes | cp -f mcm-strassen.jar " + builtFolder
+	}
+	
+	
+}

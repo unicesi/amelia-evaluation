@@ -1,0 +1,65 @@
+package co.edu.icesi.driso.matrices
+
+includes Common
+
+depends on HybridMultiplication
+
+subsystem NMatrices {
+	
+	var String common = "mcm-common"
+	var String artifact = "mcm-nmatrices"
+	var Iterable<String> libpath = #['«builtsFolder»/«common».jar','«builtsFolder»/«artifact».jar']
+	
+	on hosts.values.filter[ h |
+		#["grid11", "grid1", "grid2", "grid7", "grid5"].contains(h.identifier)] {
+		
+		init:
+			cd builtsFolder
+	}
+	
+	on hosts.get("grid11") {
+		knowledge: init;
+			run "KnowledgeBase" -libpath libpath
+		
+		processor7: knowledge;
+			run "Processor7" -libpath libpath
+	}
+	
+	on hosts.get("grid1") {
+		processor1: knowledge;
+			run "Processor1" -libpath libpath
+			
+		processor2: knowledge;
+			run "Processor2" -libpath libpath
+		
+		distributor: dispatcher;
+			run "Distributor" -libpath libpath
+	}
+	
+	on hosts.get("grid2") {
+		processor3: knowledge;
+			run "Processor3" -libpath libpath
+		
+		processor4: knowledge;
+			run "Processor4" -libpath libpath
+	}
+	
+	on hosts.get("grid7") {
+		processor5: knowledge;
+			run "Processor5" -libpath libpath
+		
+		processor6: knowledge;
+			run "Processor6" -libpath libpath
+		
+		dispatcher: processor1, processor2, processor3, 
+					processor4, processor5, processor6, 
+					processor7;
+			run "Dispatcher" -libpath libpath
+	}
+	
+	on hosts.get("grid5") {
+		control: distributor;
+			run "Control" -libpath libpath
+	}
+	
+}

@@ -1,0 +1,8 @@
+hgrid1	21	22	root	liasondriso_hgrid1	grid0
+hgrid17	21	22	root	liasondriso_hgrid2	grid1
+hgrid16	21	22	root	liasondriso_hgrid3	grid2
+hgrid15	21	22	root	liasondriso_hgrid4	grid3
+hgrid12	21	22	root	liasondriso_hgrid5	grid4
+hgrid9	21	22	root	liasondriso_hgrid6	grid5
+hgrid6	21	22	root	liasondriso_hgrid7	grid6
+hgrid10	21	22	root	liasondriso_hgrid10	grid7

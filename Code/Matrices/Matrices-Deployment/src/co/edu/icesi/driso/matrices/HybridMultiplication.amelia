@@ -1,0 +1,45 @@
+package co.edu.icesi.driso.matrices
+
+includes Common
+
+depends on Allocation
+
+subsystem HybridMultiplication {
+	
+	var String common = "mcm-common"
+	var String artifact = "mcm-hybrid-multiplication"
+	var Iterable<String> libpath = #['«builtsFolder»/«artifact».jar','«builtsFolder»/«common».jar']
+	
+	
+	on hosts.get("grid5") {
+		reducer0:
+			run "BlocksMultiplicator0" -libpath libpath
+		
+		reducer1:
+			run "BlocksMultiplicator1" -libpath libpath
+			
+		control: reducer0, reducer1, reducer2, reducer3, reducer4, reducer5;
+			run "HybridMultiplication" -libpath libpath
+	}
+	
+	on hosts.get("grid3") {
+		reducer2:
+			run "BlocksMultiplicator2" -libpath libpath
+	}
+	
+	on hosts.get("grid7") {
+		reducer3:
+			run "BlocksMultiplicator3" -libpath libpath
+	}
+	
+	on hosts.get("grid6") {
+		reducer4:
+			run "BlocksMultiplicator4" -libpath libpath
+	}
+	
+	on hosts.get("grid4") {
+		reducer5:
+			run "BlocksMultiplicator5" -libpath libpath
+	}
+	
+}

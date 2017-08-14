@@ -1,0 +1,21 @@
+package co.edu.icesi.driso.matrices
+
+import co.edu.icesi.driso.matrices.classes.SCPLogin
+import java.util.List
+import org.amelia.dsl.lib.descriptors.Host
+
+includes Common
+
+depends on Compile
+
+subsystem Allocation
+{
+	param List<Host> executionHosts
+	
+	on executionHosts
+	{
+		move:
+			SCPLogin.scpCommand(compilationHost.hostname,compilationHost.password,builtFolder,allocationTargetFolder) 
+	}
+	
+}

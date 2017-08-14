@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Deployment
+Bundle-SymbolicName: Matrices-Deployment
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.9.2",
+ org.amelia.dsl.lib.osgi;bundle-version="0.5.0"

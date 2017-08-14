@@ -1,0 +1,20 @@
+package co.edu.icesi.driso.matrices
+
+includes Common
+
+depends on Allocation
+
+subsystem Strassen {
+	
+	var String common = "mcm-common"
+	var String artifact = "mcm-strassen"
+	var Iterable<String> libpath = #['«builtsFolder»/«artifact».jar','«builtsFolder»/«common».jar']
+	
+	on hosts.get("grid1") {
+		
+		cdRun:
+			cd builtsFolder
+			run "Strassen" -libpath libpath
+	}
+	
+}

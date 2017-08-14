@@ -1,0 +1,44 @@
+package co.edu.icesi.driso.matrices.deploy
+
+import org.amelia.dsl.lib.util.RetryableDeployment
+import co.edu.icesi.driso.matrices.Compile 
+import co.edu.icesi.driso.matrices.Allocation
+import co.edu.icesi.driso.matrices.NMatrices 
+import java.util.List
+import co.edu.icesi.driso.matrices.Common
+import org.amelia.dsl.lib.descriptors.Host
+import java.util.Map
+import org.amelia.dsl.lib.util.Hosts
+
+includes co.edu.icesi.driso.matrices.Common
+includes co.edu.icesi.driso.matrices.Compile
+includes co.edu.icesi.driso.matrices.Allocation
+includes co.edu.icesi.driso.matrices.NMatrices
+
+
+deployment DeployerNMatrices
+{	
+	//BlockReduce = 1.
+	//HybridMultiplication = 2;
+	//NMatrices = 3;
+	//Strassen = 4;
+	val Integer strategy = 3;
+	 
+	//All host.
+	val Map<String, Host> hosts = Hosts.hosts("hosts.txt").toMap[h|h.identifier];
+	
+	val List<Host> executionHosts = #[hosts.get("grid11"), hosts.get("grid1"), hosts.get("grid2"), hosts.get("grid7"), hosts.get("grid5")];
+	
+	val deployHelper = new RetryableDeployment
+	
+	for(i: 1..1)
+	{
+		deployHelper.deploy([
+			add(new Common(hosts))
+			add(new Compile(strategy,hosts))
+			add(new Allocation(executionHosts,hosts))
+			add(new NMatrices(hosts))
+			start(true)
+		],1)
+	}
+}
