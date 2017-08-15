@@ -1,0 +1,144 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{authblk} % authors and affiliations
+\usepackage{parcolumns} % questions and answers in columns
+
+\input{definitions}
+\newcommand\amelia[0]{\textsc{Amelia}}
+\newcommand\ie[0]{\textit{i.e.}}
+\newcommand{\question}[1]{\colchunk{\begin{description}[style=unboxed,leftmargin=0cm]\item{#1}\end{description}}}
+\newcommand{\answer}[1]{\colchunk{\begin{description}[style=unboxed,leftmargin=0cm]\item{#1}\end{description}}\colplacechunks}
+
+\title{\textbf{Amelia Evaluation}\\User Questionnaire}
+
+\author[1]{Miguel Jim\'{e}nez}
+\author[2]{Luis F. Rivera}
+\author[2]{Norha M. Villegas}
+\author[2]{Gabriel Tamura}
+\author[1]{Hausi M\"{u}ller}
+\affil[1]{University of Victoria, Victoria, Canada}
+\affil[2]{Universidad Icesi, Cali, Colombia}
+\date{}
+\setcounter{Maxaffil}{0}
+\renewcommand\Affilfont{\itshape\small}
+
+\begin{document}
+\maketitle
+
+\Qitem{For each exercise, please indicate the time you spent (in minutes) specifying it. \newline E1. \Qline{1cm} E2. \Qline{1cm} E3. \Qline{1cm} E4. \Qline{1cm}}
+
+\Qitem{Please describe the difficulties you experienced developing this workshop. \Qlines{3}}
+
+\Qitem{How much time have you been working as a professional Software Engineer? \Qline{2.5cm}}
+
+\Qitem{Please describe how much experience you have deploying software. \Qlines{3}}
+
+\Qitem{Please describe how much experience you have with \amelia{}. \Qlines{3}}
+
+\noindent
+Please indicate your agreement or disagreement with the following statements by selecting only one square. The left-most square indicates that you \textbf{strongly agree}, while the right-most square indicates that you \textbf{strongly disagree}.
+
+\paragraph{Functional Suitability}
+\begin{parcolumns}[colwidths={1=0.76\textwidth},nofirstindent]{2}
+	\question{\Qitem{All concepts and building-blocks for solving problems in the software deployment domain can be expressed in \amelia{}.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{\amelia{} is an appropriate and useful tool for deploying software.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+\end{parcolumns}
+
+\paragraph{Usability}
+\begin{parcolumns}[colwidths={1=0.76\textwidth},nofirstindent]{2}
+	\question{\Qitem{The language elements are understandable (\textit{e.g.}, language elements can be understood after reading their descriptions).}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{The concepts and symbols of the language resemble the terminology of the deployment domain, are learnable and rememberable (\ie{}, learning easiness, easiness for developing deployment specifications).}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{\amelia{} helps users achieve their tasks in acceptable development times.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{\amelia{} is appropriate for the deployment of the type of software you work on.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{\amelia{} has useful language elements to control the actual deployment operations (\textit{e.g.}, language elements can be selected and put into practice easily, actions are undoable, error messages that explain recovery methods are available for controlling the deployment operations).}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{\amelia{} has a concise syntax that allows expressing deployment operations in short specification files.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+\end{parcolumns}
+
+\paragraph{Reliability}
+\begin{parcolumns}[colwidths={1=0.76\textwidth},nofirstindent]{2}
+	\question{\Qitem{\amelia{} prevents making errors in deployment specifications. The language constructs helps the user to avoid mistakes.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{\amelia{} includes the right elements and correct relationships between them (it prevents unexpected interactions between its elements).}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+\end{parcolumns}
+
+\paragraph{Maintainability}
+\begin{parcolumns}[colwidths={1=0.76\textwidth},nofirstindent]{2}
+	\question{\Qitem{\amelia{} is composed of discrete components such that a change to one component has minimal impact on other components.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+\end{parcolumns}
+
+\paragraph{Productivity}
+\begin{parcolumns}[colwidths={1=0.76\textwidth},nofirstindent]{2}
+	\question{\Qitem{The development time of writing software deployment specifications is improved.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{\amelia{} helps to improve the productivity of system deployment.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+\end{parcolumns}
+
+\paragraph{Expressiveness}
+\begin{parcolumns}[colwidths={1=0.76\textwidth},nofirstindent]{2}
+	\question{\Qitem{A deployment strategy can be mapped into a \amelia{} specification easily.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{\amelia{} provides one and only one good way to express every concept of interest.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{Each \amelia{} construct is used to represent exactly one distinct concept in the application domain.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{The language constructs correspond to significant application domain concepts. \amelia{} does not include domain concepts that are not important.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{\amelia{} does not contain conflicting or ambiguous elements.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+	\question{\Qitem{\amelia{} is at the right abstraction level for writing deployment specifications, such that it is not more complex or more detailed than necessary.}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+\end{parcolumns}
+
+\paragraph{Integrability}
+\begin{parcolumns}[colwidths={1=0.76\textwidth},nofirstindent]{2}
+	\question{\Qitem{\amelia{} can be integrated with other languages used in the software development process, such as using already developed libraries. (\textit{e.g.}, language integrability with other languages).}}
+	\answer{\Qrating{5}}
+	\colplacechunks
+	
+\end{parcolumns}
+	
+\end{document}
