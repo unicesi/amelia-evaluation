@@ -15,6 +15,9 @@ import org.amelia.dsl.lib.util.Commands;
 
 @SuppressWarnings("all")
 public class Compile extends Subsystem.Deployment {
+  /**
+   * The multiplication strategy to compile.
+   */
   private Strategy strategy;
   
   private Common $co$edu$icesi$driso$matrices$Common;
@@ -131,7 +134,7 @@ public class Compile extends Subsystem.Deployment {
   }
   
   private CommandDescriptor initCompileCommon2() {
-    return Commands.generic((("yes | cp -f mcm-common.jar " + this.getBuiltFolder()) + "/"));
+    return Commands.generic("yes | cp -f mcm-common.jar " + this.getBuiltFolder() + "/");
   }
   
   private Host getHost0() {
@@ -144,11 +147,11 @@ public class Compile extends Subsystem.Deployment {
   }
   
   private CommandDescriptor initStrategy11() {
-    return Commands.compile("src", "mcm-blockreduce", (this.getBuiltFolder() + "/mcm-common.jar"));
+    return Commands.compile("src", "mcm-blockreduce", "" + this.getBuiltFolder() + "/mcm-common.jar");
   }
   
   private CommandDescriptor initStrategy12() {
-    return Commands.generic(("yes | cp -f mcm-blockreduce.jar " + this.getBuiltFolder()));
+    return Commands.generic("yes | cp -f mcm-blockreduce.jar " + this.getBuiltFolder() + "");
   }
   
   private Host getHost1() {
@@ -166,11 +169,11 @@ public class Compile extends Subsystem.Deployment {
   }
   
   private CommandDescriptor initStrategy21() {
-    return Commands.compile("src", "mcm-hybrid-multiplication", (this.getBuiltFolder() + "/mcm-common.jar"));
+    return Commands.compile("src", "mcm-hybrid-multiplication", "" + this.getBuiltFolder() + "/mcm-common.jar");
   }
   
   private CommandDescriptor initStrategy22() {
-    return Commands.generic(("yes | cp -f mcm-hybrid-multiplication.jar " + this.getBuiltFolder()));
+    return Commands.generic("yes | cp -f mcm-hybrid-multiplication.jar " + this.getBuiltFolder() + "");
   }
   
   private Host getHost2() {
@@ -188,11 +191,11 @@ public class Compile extends Subsystem.Deployment {
   }
   
   private CommandDescriptor initStrategy31() {
-    return Commands.compile("src", "mcm-nmatrices", (this.getBuiltFolder() + "/mcm-common.jar"));
+    return Commands.compile("src", "mcm-nmatrices", "" + this.getBuiltFolder() + "/mcm-common.jar");
   }
   
   private CommandDescriptor initStrategy32() {
-    return Commands.generic(("yes | cp -f mcm-nmatrices.jar " + this.getBuiltFolder()));
+    return Commands.generic("yes | cp -f mcm-nmatrices.jar " + this.getBuiltFolder() + "");
   }
   
   private Host getHost3() {
@@ -210,11 +213,11 @@ public class Compile extends Subsystem.Deployment {
   }
   
   private CommandDescriptor initStrategy41() {
-    return Commands.compile("src", "mcm-strassen", (this.getBuiltFolder() + "/mcm-common.jar"));
+    return Commands.compile("src", "mcm-strassen", "" + this.getBuiltFolder() + "/mcm-common.jar");
   }
   
   private CommandDescriptor initStrategy42() {
-    return Commands.generic(("yes | cp -f mcm-strassen.jar " + this.getBuiltFolder()));
+    return Commands.generic("yes | cp -f mcm-strassen.jar " + this.getBuiltFolder() + "");
   }
   
   private Host getHost4() {

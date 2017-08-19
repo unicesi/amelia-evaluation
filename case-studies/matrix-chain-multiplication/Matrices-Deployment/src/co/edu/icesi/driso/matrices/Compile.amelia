@@ -25,43 +25,49 @@ import co.edu.icesi.driso.matrices.classes.Strategy
 
 includes Common
 
+/*
+ * Compile each strategy's source code.
+ */
 subsystem Compile {
 
+    /*
+     * The multiplication strategy to compile.
+     */
 	param Strategy strategy
-	
+
 	on compilationHost {	 
 		compileCommon:
 			cd sources.get(0)
 			compile "src" "mcm-common"
-			cmd "yes | cp -f mcm-common.jar " + builtFolder + "/"
+			cmd 'yes | cp -f mcm-common.jar «builtFolder»/'
 	}
-	
+
 	on compilationHost ? strategy == Strategy.BLOCK_REDUCE {
-		strategy1:compileCommon;
+		strategy1: compileCommon;
 			cd sources.get(1)
-			compile "src" "mcm-blockreduce" -classpath builtFolder + "/mcm-common.jar"
-			cmd "yes | cp -f mcm-blockreduce.jar " + builtFolder
+			compile "src" "mcm-blockreduce" -classpath '«builtFolder»/mcm-common.jar'
+			cmd 'yes | cp -f mcm-blockreduce.jar «builtFolder»'
 	}
-	
+
 	on compilationHost ? strategy == Strategy.HYBRID_MULTIPLICATION {
-		strategy2:compileCommon;
+		strategy2: compileCommon;
 			cd sources.get(2)
-			compile "src" "mcm-hybrid-multiplication" -classpath builtFolder + "/mcm-common.jar"
-			cmd "yes | cp -f mcm-hybrid-multiplication.jar " + builtFolder
+			compile "src" "mcm-hybrid-multiplication" -classpath '«builtFolder»/mcm-common.jar'
+			cmd 'yes | cp -f mcm-hybrid-multiplication.jar «builtFolder»'
 	}
-	
+
 	on compilationHost ? strategy == Strategy.N_MATRICES {
-		strategy3:compileCommon;
+		strategy3: compileCommon;
 			cd sources.get(3)
-			compile "src" "mcm-nmatrices" -classpath builtFolder + "/mcm-common.jar"
-			cmd "yes | cp -f mcm-nmatrices.jar " + builtFolder
+			compile "src" "mcm-nmatrices" -classpath '«builtFolder»/mcm-common.jar'
+			cmd 'yes | cp -f mcm-nmatrices.jar «builtFolder»'
 	}
-	
+
 	on compilationHost ? strategy == Strategy.STRASSEN {
-		strategy4:compileCommon;
+		strategy4: compileCommon;
 			cd sources.get(4)
-			compile "src" "mcm-strassen" -classpath builtFolder + "/mcm-common.jar"
-			cmd "yes | cp -f mcm-strassen.jar " + builtFolder
+			compile "src" "mcm-strassen" -classpath '«builtFolder»/mcm-common.jar'
+			cmd 'yes | cp -f mcm-strassen.jar «builtFolder»'
 	}
 
 }

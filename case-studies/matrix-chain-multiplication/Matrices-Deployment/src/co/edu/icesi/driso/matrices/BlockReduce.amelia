@@ -28,6 +28,9 @@ includes Common
 
 depends on Allocation
 
+/*
+ * Execute the BlockReduce multiplication strategy.
+ */
 subsystem BlockReduce {
 	
 	param List<Host> executionHosts

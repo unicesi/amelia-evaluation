@@ -36,20 +36,24 @@ includes co.edu.icesi.driso.matrices.Compile
 includes co.edu.icesi.driso.matrices.Allocation
 includes co.edu.icesi.driso.matrices.HybridMultiplication
 
-deployment SimpleHybridMultiplication {	
-
-	val Strategy strategy = Strategy.HYBRID_MULTIPLICATION
-	 
-	//All hosts
+/*
+ * Deploy the HybridMultiplication strategy once and then
+ * stop the executed components.
+ */
+deployment SimpleHybridMultiplication {	 
+	// Load all hosts and then filter
 	val Map<String, Host> hosts = Hosts.hosts("hosts.txt").toMap[h|h.identifier]
 	val List<Host> executionHosts = #[
 	    hosts.get("grid3"), hosts.get("grid4"), hosts.get("grid5"),
 	    hosts.get("grid6"), hosts.get("grid7")
 	]
-	
+
+	// Add subsystems to deploy
 	add(new Common(hosts))
-    add(new Compile(strategy, hosts))
+    add(new Compile(Strategy.HYBRID_MULTIPLICATION, hosts))
     add(new Allocation(executionHosts, hosts))
     add(new HybridMultiplication(hosts))
+
+    // Deploy and then stop the executed components
     start(true)
 }

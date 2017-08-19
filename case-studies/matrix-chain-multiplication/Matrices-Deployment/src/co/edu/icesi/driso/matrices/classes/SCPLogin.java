@@ -32,25 +32,40 @@ public class SCPLogin {
 
 	public static CommandDescriptor scpCommand(final String hostName,
 	    final String hostPassword, final String source, final String target) {
-		return new CommandDescriptor.Builder().withSuccessMessage("Copied file!")
-			.withErrorMessage("File couldn't be copied!").withCallable(new CallableTask<Boolean>() {
+		return new CommandDescriptor.Builder()
+		    .withSuccessMessage("Copied file!")
+			.withErrorMessage("File couldn't be copied!")
+			.withCallable(new CallableTask<Boolean>() {
 				@Override
 				public Boolean call(Host host, String prompt) throws Exception {
-					boolean r = true;
 					final Expect session = host.ssh().expect();
-					String scpCommand = "scp -r root@" + hostName + ":" + source + " " + target;
-					session.sendLine(scpCommand);
+					session.sendLine(
+					    String.format(
+					        "scp -r root@%s:%s %s",
+					        hostName,
+					        source,
+					        target
+					    )
+					);
 					try {
-						session.expect(Matchers.regexp("Are you sure you want to continue connecting (yes/no)?"));
+						session.expect(
+						    Matchers.regexp("Are you sure you want to continue connecting (yes/no)?")
+						);
 						session.sendLine("yes");
 					} catch (IOException e) {
 					    // Do nothing
 					}
-					String passwordRequest = "root@" + hostName + "'s password:";
-					session.expect(Matchers.regexp(passwordRequest));
+					session.expect(
+					    Matchers.regexp(
+					        String.format(
+					            "root@%s's password:",
+					            hostName
+					        )
+					    )
+					);
 					session.sendLine(hostPassword);
 					session.expect(Matchers.regexp(prompt));
-					return r;
+					return true;
 				}
 			}).build();
 	}

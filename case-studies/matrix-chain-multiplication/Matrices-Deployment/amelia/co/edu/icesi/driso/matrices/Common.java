@@ -9,6 +9,9 @@ import org.amelia.dsl.lib.descriptors.CommandDescriptor;
 import org.amelia.dsl.lib.descriptors.Host;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
+/**
+ * Common definitions for all of the deployments/subsystems.
+ */
 @SuppressWarnings("all")
 public class Common extends Subsystem.Deployment {
   /**
@@ -173,7 +176,7 @@ public class Common extends Subsystem.Deployment {
   }
   
   private String initBuiltsFolder() {
-    return (this.allocationTargetFolder + "built-sources");
+    return "" + this.allocationTargetFolder + "built-sources";
   }
   
   public String getBuiltsFolder() {

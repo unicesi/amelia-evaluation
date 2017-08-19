@@ -34,7 +34,6 @@ public class SimpleBlockReduce {
   
   private void custom() {
     try {
-      final Strategy strategy = Strategy.BLOCK_REDUCE;
       List<Host> _hosts = Hosts.hosts("hosts.txt");
       final Function1<Host, String> _function = new Function1<Host, String>() {
         @Override
@@ -52,7 +51,7 @@ public class SimpleBlockReduce {
       final List<Host> executionHosts = Collections.<Host>unmodifiableList(CollectionLiterals.<Host>newArrayList(_get, _get_1, _get_2, _get_3, _get_4, _get_5));
       Common _common = new Common(hosts);
       this.add(_common);
-      Compile _compile = new Compile(strategy, hosts);
+      Compile _compile = new Compile(Strategy.BLOCK_REDUCE, hosts);
       this.add(_compile);
       Allocation _allocation = new Allocation(executionHosts, hosts);
       this.add(_allocation);

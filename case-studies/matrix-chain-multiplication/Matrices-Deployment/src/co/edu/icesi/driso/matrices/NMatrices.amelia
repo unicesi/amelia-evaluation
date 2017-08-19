@@ -25,6 +25,9 @@ includes Common
 
 depends on HybridMultiplication
 
+/*
+ * Execute the NMatrices multiplication strategy.
+ */
 subsystem NMatrices {
 	
 	var String common = "mcm-common"

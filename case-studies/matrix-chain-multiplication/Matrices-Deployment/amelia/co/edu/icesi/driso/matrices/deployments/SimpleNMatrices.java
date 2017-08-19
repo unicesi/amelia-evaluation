@@ -34,7 +34,6 @@ public class SimpleNMatrices {
   
   private void custom() {
     try {
-      final Strategy strategy = Strategy.N_MATRICES;
       List<Host> _hosts = Hosts.hosts("hosts.txt");
       final Function1<Host, String> _function = new Function1<Host, String>() {
         @Override
@@ -51,7 +50,7 @@ public class SimpleNMatrices {
       final List<Host> executionHosts = Collections.<Host>unmodifiableList(CollectionLiterals.<Host>newArrayList(_get, _get_1, _get_2, _get_3, _get_4));
       Common _common = new Common(hosts);
       this.add(_common);
-      Compile _compile = new Compile(strategy, hosts);
+      Compile _compile = new Compile(Strategy.N_MATRICES, hosts);
       this.add(_compile);
       Allocation _allocation = new Allocation(executionHosts, hosts);
       this.add(_allocation);

@@ -25,22 +25,25 @@ import java.util.List
 import java.util.Map
 import org.amelia.dsl.lib.descriptors.Host
 
+/*
+ * Common definitions for all of the deployments/subsystems.
+ */
 subsystem Common {
-	
+
 	/*
 	 * All hosts.
 	 */
 	param Map<String, Host> hosts
-	
+
 	//-------------------------------------------------------------------------
 	// Compilation parameters
 	//-------------------------------------------------------------------------
-	
+
 	/*
 	 * Compilation host.
 	 */
 	var Host compilationHost = hosts.get("grid0");
-	
+
 	/*
 	 * Sources to compile.
 	 */
@@ -57,7 +60,7 @@ subsystem Common {
 	    commonSources, blockRSources, hybridSources, nMatricesSources,
 	    strassenSources
 	]
-	
+
 	/*
 	 * Built sources folder (The site where compilation artifacts are located).
 	 */
@@ -66,15 +69,15 @@ subsystem Common {
 	//-------------------------------------------------------------------------
 	// Allocation parameters
 	//-------------------------------------------------------------------------
-	
+
 	/*
 	 * The folder in the execution nodes where artifacts are allocated.
 	 */
 	var String allocationTargetFolder = "/home/sas1/";
-	
+
 	/*
 	 * Target sources folder in the execution nodes
 	 * (The site where the jars are executed).
 	 */
-	var String builtsFolder = allocationTargetFolder + "built-sources";
+	var String builtsFolder = '«allocationTargetFolder»built-sources';
 }

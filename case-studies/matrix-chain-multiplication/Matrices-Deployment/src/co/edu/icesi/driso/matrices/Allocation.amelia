@@ -40,7 +40,7 @@ subsystem Allocation {
 			    compilationHost.password,
 			    builtFolder,
 			    allocationTargetFolder
-			) 
+			)
 	}
 	
 }

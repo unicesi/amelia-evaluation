@@ -25,6 +25,9 @@ includes Common
 
 depends on Allocation
 
+/*
+ * Execute the Strassen multiplication strategy.
+ */
 subsystem Strassen {
 	
 	var String common = "mcm-common"
