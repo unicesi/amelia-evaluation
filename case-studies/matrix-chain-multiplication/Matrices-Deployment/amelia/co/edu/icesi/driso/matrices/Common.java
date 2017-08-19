@@ -11,10 +11,19 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
 public class Common extends Subsystem.Deployment {
+  /**
+   * All hosts.
+   */
   private Map<String, Host> hosts;
   
+  /**
+   * Compilation host.
+   */
   private Host compilationHost;
   
+  /**
+   * Sources to compile.
+   */
   private String commonSources;
   
   private String blockRSources;
@@ -25,12 +34,25 @@ public class Common extends Subsystem.Deployment {
   
   private String strassenSources;
   
+  /**
+   * Compilation sources.
+   */
   private List<String> sources;
   
+  /**
+   * Built sources folder (The site where compilation artifacts are located).
+   */
   private String builtFolder;
   
+  /**
+   * The folder in the execution nodes where artifacts are allocated.
+   */
   private String allocationTargetFolder;
   
+  /**
+   * Target sources folder in the execution nodes
+   * (The site where the jars are executed).
+   */
   private String builtsFolder;
   
   public Common() {

@@ -19,28 +19,37 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
-package co.edu.icesi.driso.matrices
+package co.edu.icesi.driso.matrices.deployments
 
-import co.edu.icesi.driso.matrices.classes.SCPLogin
+import co.edu.icesi.driso.matrices.Allocation
+import co.edu.icesi.driso.matrices.Common
+import co.edu.icesi.driso.matrices.Compile
+import co.edu.icesi.driso.matrices.HybridMultiplication
+import co.edu.icesi.driso.matrices.classes.Strategy
 import java.util.List
+import java.util.Map
 import org.amelia.dsl.lib.descriptors.Host
+import org.amelia.dsl.lib.util.Hosts
 
-includes Common
+includes co.edu.icesi.driso.matrices.Common
+includes co.edu.icesi.driso.matrices.Compile
+includes co.edu.icesi.driso.matrices.Allocation
+includes co.edu.icesi.driso.matrices.HybridMultiplication
 
-depends on Compile
+deployment SimpleHybridMultiplication {	
 
-subsystem Allocation {
-
-	param List<Host> executionHosts
-
-	on executionHosts {
-		move:
-			SCPLogin.scpCommand(
-			    compilationHost.hostname,
-			    compilationHost.password,
-			    builtFolder,
-			    allocationTargetFolder
-			) 
-	}
+	val Strategy strategy = Strategy.HYBRID_MULTIPLICATION
+	 
+	//All hosts
+	val Map<String, Host> hosts = Hosts.hosts("hosts.txt").toMap[h|h.identifier]
+	val List<Host> executionHosts = #[
+	    hosts.get("grid3"), hosts.get("grid4"), hosts.get("grid5"),
+	    hosts.get("grid6"), hosts.get("grid7")
+	]
 	
+	add(new Common(hosts))
+    add(new Compile(strategy, hosts))
+    add(new Allocation(executionHosts, hosts))
+    add(new HybridMultiplication(hosts))
+    start(true)
 }

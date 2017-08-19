@@ -1,6 +1,8 @@
 package co.edu.icesi.driso.matrices;
 
 import co.edu.icesi.driso.matrices.Common;
+import co.edu.icesi.driso.matrices.classes.Strategy;
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +15,7 @@ import org.amelia.dsl.lib.util.Commands;
 
 @SuppressWarnings("all")
 public class Compile extends Subsystem.Deployment {
-  private Integer strategy;
+  private Strategy strategy;
   
   private Common $co$edu$icesi$driso$matrices$Common;
   
@@ -32,7 +34,7 @@ public class Compile extends Subsystem.Deployment {
     
   }
   
-  public Compile(final Integer strategy, final Map<String, Host> $co$edu$icesi$driso$matrices$Common$hosts) {
+  public Compile(final Strategy strategy, final Map<String, Host> $co$edu$icesi$driso$matrices$Common$hosts) {
     this.strategy = strategy;
     this.$co$edu$icesi$driso$matrices$Common = new co.edu.icesi.driso.matrices.Common($co$edu$icesi$driso$matrices$Common$hosts);
     
@@ -116,7 +118,7 @@ public class Compile extends Subsystem.Deployment {
     	+ " parameters cannot be executed without using a deployment descriptor");
   }
   
-  public Integer getStrategy() {
+  public Strategy getStrategy() {
     return this.strategy;
   }
   
@@ -155,7 +157,8 @@ public class Compile extends Subsystem.Deployment {
   }
   
   public boolean getHostCondition1() {
-    return ((this.strategy).intValue() == 1);
+    boolean _equals = Objects.equal(this.strategy, Strategy.BLOCK_REDUCE);
+    return _equals;
   }
   
   private CommandDescriptor initStrategy20() {
@@ -176,7 +179,8 @@ public class Compile extends Subsystem.Deployment {
   }
   
   public boolean getHostCondition2() {
-    return ((this.strategy).intValue() == 2);
+    boolean _equals = Objects.equal(this.strategy, Strategy.HYBRID_MULTIPLICATION);
+    return _equals;
   }
   
   private CommandDescriptor initStrategy30() {
@@ -197,7 +201,8 @@ public class Compile extends Subsystem.Deployment {
   }
   
   public boolean getHostCondition3() {
-    return ((this.strategy).intValue() == 3);
+    boolean _equals = Objects.equal(this.strategy, Strategy.N_MATRICES);
+    return _equals;
   }
   
   private CommandDescriptor initStrategy40() {
@@ -218,7 +223,8 @@ public class Compile extends Subsystem.Deployment {
   }
   
   public boolean getHostCondition4() {
-    return ((this.strategy).intValue() == 4);
+    boolean _equals = Objects.equal(this.strategy, Strategy.STRASSEN);
+    return _equals;
   }
   
   public Map<String, Host> getHosts() {

@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Universidad Icesi
+ * Copyright 2017 University of Victoria
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -19,28 +19,18 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
-package co.edu.icesi.driso.matrices
+package co.edu.icesi.driso.matrices.classes;
 
-import co.edu.icesi.driso.matrices.classes.SCPLogin
-import java.util.List
-import org.amelia.dsl.lib.descriptors.Host
-
-includes Common
-
-depends on Compile
-
-subsystem Allocation {
-
-	param List<Host> executionHosts
-
-	on executionHosts {
-		move:
-			SCPLogin.scpCommand(
-			    compilationHost.hostname,
-			    compilationHost.password,
-			    builtFolder,
-			    allocationTargetFolder
-			) 
-	}
-	
+/**
+ * The mcm strategies.
+ * @author Miguel Jimenez (miguel@uvic.ca)
+ * @date 2017-08-19
+ * @version $Id$
+ * @since 0.0.1
+ */
+public enum Strategy {
+    BLOCK_REDUCE,
+    HYBRID_MULTIPLICATION,
+    N_MATRICES,
+    STRASSEN
 }
