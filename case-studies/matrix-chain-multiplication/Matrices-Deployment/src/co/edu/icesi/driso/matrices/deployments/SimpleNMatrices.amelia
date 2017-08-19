@@ -44,16 +44,16 @@ deployment SimpleNMatrices {
 	// Load all hosts and then filter
 	val Map<String, Host> hosts = Hosts.hosts("hosts.txt").toMap[h|h.identifier]
 	val List<Host> executionHosts = #[
-	    hosts.get("grid11"), hosts.get("grid1"), hosts.get("grid2"),
-	    hosts.get("grid7"), hosts.get("grid5")
+	 hosts.get("grid11"), hosts.get("grid1"), hosts.get("grid2"),
+	 hosts.get("grid7"), hosts.get("grid5")
 	]
 
 	// Add subsystems to deploy
 	add(new Common(hosts))
-    add(new Compile(Strategy.N_MATRICES, hosts))
-    add(new Allocation(executionHosts, hosts))
-    add(new NMatrices(hosts))
+	add(new Compile(Strategy.N_MATRICES, hosts))
+	add(new Allocation(executionHosts, hosts))
+	add(new NMatrices(hosts))
 
-    // Deploy and then stop the executed components
-    start(true)
+	// Deploy and then stop the executed components
+	start(true)
 }

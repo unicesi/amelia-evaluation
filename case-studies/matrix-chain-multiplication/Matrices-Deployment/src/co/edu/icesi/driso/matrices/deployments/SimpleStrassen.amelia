@@ -47,10 +47,10 @@ deployment SimpleStrassen {
 
 	// Add subsystems to deploy
 	add(new Common(hosts))
-    add(new Compile(Strategy.STRASSEN, hosts))
-    add(new Allocation(executionHosts, hosts))
-    add(new Strassen(hosts))
+	add(new Compile(Strategy.STRASSEN, hosts))
+	add(new Allocation(executionHosts, hosts))
+	add(new Strassen(hosts))
 
-    // Deploy and then stop the executed components
-    start(true)
+	// Deploy and then stop the executed components
+	start(true)
 }

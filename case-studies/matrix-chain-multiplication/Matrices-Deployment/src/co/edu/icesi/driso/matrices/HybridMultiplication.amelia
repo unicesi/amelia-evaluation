@@ -33,19 +33,18 @@ subsystem HybridMultiplication {
 	var String common = "mcm-common"
 	var String artifact = "mcm-hybrid-multiplication"
 	var Iterable<String> libpath = #[
-	    '«builtsFolder»/«artifact».jar',
-	    '«builtsFolder»/«common».jar'
+        '«builtsFolder»/«artifact».jar',
+        '«builtsFolder»/«common».jar'
 	]
-	
-	
-	on hosts.get("grid5") {
-		reducer0:
+
+    on hosts.get("grid5") {
+        reducer0:
 			run "BlocksMultiplicator0" -libpath libpath
-		
-		reducer1:
+
+        reducer1:
 			run "BlocksMultiplicator1" -libpath libpath
-			
-		control: reducer0, reducer1, reducer2, reducer3, reducer4, reducer5;
+
+        control: reducer0, reducer1, reducer2, reducer3, reducer4, reducer5;
 			run "HybridMultiplication" -libpath libpath
 	}
 	

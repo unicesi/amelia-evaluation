@@ -36,10 +36,10 @@ subsystem Allocation {
 	on executionHosts {
 		move:
 			SCPLogin.scpCommand(
-			    compilationHost.hostname,
-			    compilationHost.password,
-			    builtFolder,
-			    allocationTargetFolder
+	           compilationHost.hostname,
+	           compilationHost.password,
+	           builtFolder,
+	           allocationTargetFolder
 			)
 	}
 	

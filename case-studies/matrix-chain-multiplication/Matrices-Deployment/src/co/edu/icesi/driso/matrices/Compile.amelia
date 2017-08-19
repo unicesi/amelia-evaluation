@@ -29,10 +29,9 @@ includes Common
  * Compile each strategy's source code.
  */
 subsystem Compile {
-
     /*
-     * The multiplication strategy to compile.
-     */
+    * The multiplication strategy to compile.
+    */
 	param Strategy strategy
 
 	on compilationHost {	 

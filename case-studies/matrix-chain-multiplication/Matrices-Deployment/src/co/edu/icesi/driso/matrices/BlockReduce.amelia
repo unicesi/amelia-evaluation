@@ -38,20 +38,19 @@ subsystem BlockReduce {
 	var String common = "mcm-common"
 	var String artifact = "mcm-blockreduce"
 	var Iterable<String> libpath = #[
-	    '«builtsFolder»/«common».jar',
-	    '«builtsFolder»/«artifact».jar'
+	 '«builtsFolder»/«common».jar',
+	 '«builtsFolder»/«artifact».jar'
 	]
 	
 	on executionHosts {
-		 
 		init:
-			cd builtsFolder
+            cd builtsFolder
 	}
 	
 	on hosts.get("grid1") {
 		reducer0: matrixBuilder;
 			run "BlocksMultiplicator0" -libpath libpath
-		
+
 		control: reducer0, reducer1, reducer2, reducer3, reducer4, reducer5;
 			run "Blockreduce" -libpath libpath
 	}
@@ -74,7 +73,7 @@ subsystem BlockReduce {
 	on hosts.get("grid5") {
 		matrixBuilder: init;
 			run "FinalMatrixBuilder" -libpath libpath
-			
+	
 		reducer4: matrixBuilder;
 			run "BlocksMultiplicator4" -libpath libpath
 	}
