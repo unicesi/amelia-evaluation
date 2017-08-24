@@ -1,29 +1,9 @@
 package edu.icesi.amelia.validation.cts.deployments 
 
 import org.amelia.dsl.lib.util.RetryableDeployment
-import edu.icesi.amelia.validation.cts.subsystems.Compilation
 import org.amelia.dsl.lib.descriptors.Host
-import edu.icesi.amelia.validation.cts.subsystems.ExternalProbe
-
-import edu.icesi.amelia.validation.cts.monitors.Monitor_1 
-import edu.icesi.amelia.validation.cts.monitors.Monitor_2
-import edu.icesi.amelia.validation.cts.monitors.Monitor_3
-import edu.icesi.amelia.validation.cts.monitors.Monitor_4
-import edu.icesi.amelia.validation.cts.monitors.Monitor_5
-import edu.icesi.amelia.validation.cts.monitors.Monitor_6
-import edu.icesi.amelia.validation.cts.monitors.Monitor_7
-import edu.icesi.amelia.validation.cts.monitors.Monitor_8
-import edu.icesi.amelia.validation.cts.monitors.Monitor_9
-import edu.icesi.amelia.validation.cts.monitors.Monitor_10
-import edu.icesi.amelia.validation.cts.monitors.Monitor_11
-import edu.icesi.amelia.validation.cts.monitors.Monitor_12
-import edu.icesi.amelia.validation.cts.monitors.Monitor_13
-import edu.icesi.amelia.validation.cts.subsystems.JMeter_12NO
-import edu.icesi.amelia.validation.cts.subsystems.LoadBalancer
-import edu.icesi.amelia.validation.cts.subsystems.StoreProcedures
-import edu.icesi.amelia.validation.cts.subsystems.Bridge_Server
-import java.util.Map
 import org.amelia.dsl.lib.util.Hosts
+import java.util.Map
 
 includes edu.icesi.amelia.validation.cts.subsystems.ExternalProbe
 includes edu.icesi.amelia.validation.cts.subsystems.Compilation

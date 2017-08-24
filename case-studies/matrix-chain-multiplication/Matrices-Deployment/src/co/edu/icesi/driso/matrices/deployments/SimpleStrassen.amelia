@@ -21,10 +21,6 @@
  */
 package co.edu.icesi.driso.matrices.deployments
 
-import co.edu.icesi.driso.matrices.Allocation
-import co.edu.icesi.driso.matrices.Common
-import co.edu.icesi.driso.matrices.Compile
-import co.edu.icesi.driso.matrices.Strassen
 import co.edu.icesi.driso.matrices.classes.Strategy
 import java.util.List
 import java.util.Map

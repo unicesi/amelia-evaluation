@@ -1,6 +1,5 @@
 package co.edu.icesi.driso.matrices;
 
-import co.edu.icesi.driso.matrices.Common;
 import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +22,7 @@ public class BlockReduce extends Subsystem.Deployment {
   
   private Iterable<String> libpath;
   
-  private Common $co$edu$icesi$driso$matrices$Common;
+  private co.edu.icesi.driso.matrices.Common $co$edu$icesi$driso$matrices$Common;
   
   public final CommandDescriptor[] init = new CommandDescriptor[1];
   

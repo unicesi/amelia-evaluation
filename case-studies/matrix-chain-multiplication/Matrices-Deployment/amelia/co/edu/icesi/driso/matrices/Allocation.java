@@ -1,6 +1,5 @@
 package co.edu.icesi.driso.matrices;
 
-import co.edu.icesi.driso.matrices.Common;
 import co.edu.icesi.driso.matrices.classes.SCPLogin;
 import com.google.common.collect.Lists;
 import java.util.List;
@@ -15,7 +14,7 @@ import org.amelia.dsl.lib.util.Arrays;
 public class Allocation extends Subsystem.Deployment {
   private List<Host> executionHosts;
   
-  private Common $co$edu$icesi$driso$matrices$Common;
+  private co.edu.icesi.driso.matrices.Common $co$edu$icesi$driso$matrices$Common;
   
   public final CommandDescriptor[] move = new CommandDescriptor[1];
   

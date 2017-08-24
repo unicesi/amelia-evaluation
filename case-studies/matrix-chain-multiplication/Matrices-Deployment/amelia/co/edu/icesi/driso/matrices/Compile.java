@@ -1,6 +1,5 @@
 package co.edu.icesi.driso.matrices;
 
-import co.edu.icesi.driso.matrices.Common;
 import co.edu.icesi.driso.matrices.classes.Strategy;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
@@ -20,7 +19,7 @@ public class Compile extends Subsystem.Deployment {
    */
   private Strategy strategy;
   
-  private Common $co$edu$icesi$driso$matrices$Common;
+  private co.edu.icesi.driso.matrices.Common $co$edu$icesi$driso$matrices$Common;
   
   public final CommandDescriptor[] compileCommon = new CommandDescriptor[3];
   

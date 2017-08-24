@@ -21,10 +21,6 @@
  */
 package co.edu.icesi.driso.matrices.deployments
 
-import co.edu.icesi.driso.matrices.Allocation
-import co.edu.icesi.driso.matrices.BlockReduce
-import co.edu.icesi.driso.matrices.Common
-import co.edu.icesi.driso.matrices.Compile
 import co.edu.icesi.driso.matrices.classes.Strategy
 import java.util.List
 import java.util.Map
@@ -44,8 +40,8 @@ deployment SimpleBlockReduce {
 	// Load all hosts and then filter
 	val Map<String, Host> hosts = Hosts.hosts("hosts.txt").toMap[h|h.identifier]
 	val List<Host> executionHosts = #[
-	 hosts.get("grid1"), hosts.get("grid2"), hosts.get("grid3"),
-	 hosts.get("grid4"), hosts.get("grid5"), hosts.get("grid6")
+	   hosts.get("grid1"), hosts.get("grid2"), hosts.get("grid3"),
+	   hosts.get("grid4"), hosts.get("grid5"), hosts.get("grid6")
 	]
 
 	// Add subsystems to deploy
