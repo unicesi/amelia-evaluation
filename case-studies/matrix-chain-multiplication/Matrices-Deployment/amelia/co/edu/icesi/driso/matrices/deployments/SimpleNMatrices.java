@@ -21,6 +21,10 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+/**
+ * Deploy the NMatrices strategy once and then
+ * stop the executed components.
+ */
 @SuppressWarnings("all")
 public class SimpleNMatrices {
   private HashMap<String, List<Subsystem>> ＿subsystems = new HashMap<String, List<Subsystem>>();

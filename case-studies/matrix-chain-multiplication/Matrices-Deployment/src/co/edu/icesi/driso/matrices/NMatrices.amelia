@@ -21,9 +21,9 @@
  */
 package co.edu.icesi.driso.matrices
 
-includes Common
+includes co.edu.icesi.driso.matrices.Common
 
-depends on HybridMultiplication
+depends on co.edu.icesi.driso.matrices.HybridMultiplication
 
 /*
  * Execute the NMatrices multiplication strategy.

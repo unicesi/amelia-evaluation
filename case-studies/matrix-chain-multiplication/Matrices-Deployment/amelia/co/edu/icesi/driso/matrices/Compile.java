@@ -1,5 +1,6 @@
 package co.edu.icesi.driso.matrices;
 
+import co.edu.icesi.driso.matrices.Common;
 import co.edu.icesi.driso.matrices.classes.Strategy;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
@@ -12,6 +13,9 @@ import org.amelia.dsl.lib.descriptors.Host;
 import org.amelia.dsl.lib.util.Arrays;
 import org.amelia.dsl.lib.util.Commands;
 
+/**
+ * Compile each strategy's source code.
+ */
 @SuppressWarnings("all")
 public class Compile extends Subsystem.Deployment {
   /**
@@ -19,7 +23,7 @@ public class Compile extends Subsystem.Deployment {
    */
   private Strategy strategy;
   
-  private co.edu.icesi.driso.matrices.Common $co$edu$icesi$driso$matrices$Common;
+  private Common $co$edu$icesi$driso$matrices$Common;
   
   public final CommandDescriptor[] compileCommon = new CommandDescriptor[3];
   
@@ -72,41 +76,45 @@ public class Compile extends Subsystem.Deployment {
     compileCommon[2].runsOn(hosts0);
     compileCommon[2].dependsOn(compileCommon[1]);
     List<Host> hosts1 = Lists.newArrayList(getHost1());
-    if (getHostCondition1()) {
-      strategy1[0].runsOn(hosts1);
-      strategy1[0].dependsOn(compileCommon[2]);
-      strategy1[1].runsOn(hosts1);
-      strategy1[1].dependsOn(strategy1[0]);
-      strategy1[2].runsOn(hosts1);
-      strategy1[2].dependsOn(strategy1[1]);
-    }
+    strategy1[0].runsOn(hosts1);
+    strategy1[0].addExecutionCondition(getHostCondition1());
+    strategy1[0].dependsOn(compileCommon[2]);
+    strategy1[1].runsOn(hosts1);
+    strategy1[1].addExecutionCondition(getHostCondition1());
+    strategy1[1].dependsOn(strategy1[0]);
+    strategy1[2].runsOn(hosts1);
+    strategy1[2].addExecutionCondition(getHostCondition1());
+    strategy1[2].dependsOn(strategy1[1]);
     List<Host> hosts2 = Lists.newArrayList(getHost2());
-    if (getHostCondition2()) {
-      strategy2[0].runsOn(hosts2);
-      strategy2[0].dependsOn(compileCommon[2]);
-      strategy2[1].runsOn(hosts2);
-      strategy2[1].dependsOn(strategy2[0]);
-      strategy2[2].runsOn(hosts2);
-      strategy2[2].dependsOn(strategy2[1]);
-    }
+    strategy2[0].runsOn(hosts2);
+    strategy2[0].addExecutionCondition(getHostCondition2());
+    strategy2[0].dependsOn(compileCommon[2]);
+    strategy2[1].runsOn(hosts2);
+    strategy2[1].addExecutionCondition(getHostCondition2());
+    strategy2[1].dependsOn(strategy2[0]);
+    strategy2[2].runsOn(hosts2);
+    strategy2[2].addExecutionCondition(getHostCondition2());
+    strategy2[2].dependsOn(strategy2[1]);
     List<Host> hosts3 = Lists.newArrayList(getHost3());
-    if (getHostCondition3()) {
-      strategy3[0].runsOn(hosts3);
-      strategy3[0].dependsOn(compileCommon[2]);
-      strategy3[1].runsOn(hosts3);
-      strategy3[1].dependsOn(strategy3[0]);
-      strategy3[2].runsOn(hosts3);
-      strategy3[2].dependsOn(strategy3[1]);
-    }
+    strategy3[0].runsOn(hosts3);
+    strategy3[0].addExecutionCondition(getHostCondition3());
+    strategy3[0].dependsOn(compileCommon[2]);
+    strategy3[1].runsOn(hosts3);
+    strategy3[1].addExecutionCondition(getHostCondition3());
+    strategy3[1].dependsOn(strategy3[0]);
+    strategy3[2].runsOn(hosts3);
+    strategy3[2].addExecutionCondition(getHostCondition3());
+    strategy3[2].dependsOn(strategy3[1]);
     List<Host> hosts4 = Lists.newArrayList(getHost4());
-    if (getHostCondition4()) {
-      strategy4[0].runsOn(hosts4);
-      strategy4[0].dependsOn(compileCommon[2]);
-      strategy4[1].runsOn(hosts4);
-      strategy4[1].dependsOn(strategy4[0]);
-      strategy4[2].runsOn(hosts4);
-      strategy4[2].dependsOn(strategy4[1]);
-    }
+    strategy4[0].runsOn(hosts4);
+    strategy4[0].addExecutionCondition(getHostCondition4());
+    strategy4[0].dependsOn(compileCommon[2]);
+    strategy4[1].runsOn(hosts4);
+    strategy4[1].addExecutionCondition(getHostCondition4());
+    strategy4[1].dependsOn(strategy4[0]);
+    strategy4[2].runsOn(hosts4);
+    strategy4[2].addExecutionCondition(getHostCondition4());
+    strategy4[2].dependsOn(strategy4[1]);
   }
   
   public void deploy(final String ＿subsystem, final List<Subsystem> ＿dependencies) throws Exception {

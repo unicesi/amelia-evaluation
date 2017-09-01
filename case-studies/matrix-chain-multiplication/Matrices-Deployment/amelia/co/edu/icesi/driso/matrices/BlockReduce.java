@@ -1,5 +1,6 @@
 package co.edu.icesi.driso.matrices;
 
+import co.edu.icesi.driso.matrices.Common;
 import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +13,9 @@ import org.amelia.dsl.lib.util.Arrays;
 import org.amelia.dsl.lib.util.Commands;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
+/**
+ * Execute the BlockReduce multiplication strategy.
+ */
 @SuppressWarnings("all")
 public class BlockReduce extends Subsystem.Deployment {
   private List<Host> executionHosts;
@@ -22,7 +26,7 @@ public class BlockReduce extends Subsystem.Deployment {
   
   private Iterable<String> libpath;
   
-  private co.edu.icesi.driso.matrices.Common $co$edu$icesi$driso$matrices$Common;
+  private Common $co$edu$icesi$driso$matrices$Common;
   
   public final CommandDescriptor[] init = new CommandDescriptor[1];
   
@@ -77,7 +81,8 @@ public class BlockReduce extends Subsystem.Deployment {
     init[0].runsOn(hosts0);
     List<Host> hosts1 = Lists.newArrayList(getHost1());
     reducer0[0].runsOn(hosts1);
-    reducer0[0].dependsOn(matrixBuilder[0]);control[0].runsOn(hosts1);
+    reducer0[0].dependsOn(matrixBuilder[0]);
+    control[0].runsOn(hosts1);
     control[0].dependsOn(reducer0[0], reducer1[0], reducer2[0], reducer3[0], reducer4[0], reducer5[0]);
     List<Host> hosts2 = Lists.newArrayList(getHost2());
     reducer1[0].runsOn(hosts2);
@@ -90,7 +95,8 @@ public class BlockReduce extends Subsystem.Deployment {
     reducer3[0].dependsOn(matrixBuilder[0]);
     List<Host> hosts5 = Lists.newArrayList(getHost5());
     matrixBuilder[0].runsOn(hosts5);
-    matrixBuilder[0].dependsOn(init[0]);reducer4[0].runsOn(hosts5);
+    matrixBuilder[0].dependsOn(init[0]);
+    reducer4[0].runsOn(hosts5);
     reducer4[0].dependsOn(matrixBuilder[0]);
     List<Host> hosts6 = Lists.newArrayList(getHost6());
     reducer5[0].runsOn(hosts6);

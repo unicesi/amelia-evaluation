@@ -35,9 +35,10 @@ public class SCPLogin {
 		return new CommandDescriptor.Builder()
 		    .withSuccessMessage("Copied file!")
 			.withErrorMessage("File couldn't be copied!")
-			.withCallable(new CallableTask<Boolean>() {
+			.withCallable(new CallableTask<Object>() {
 				@Override
-				public Boolean call(Host host, String prompt) throws Exception {
+				public Boolean call(Host host, String prompt, boolean quiet)
+				    throws Exception {
 					final Expect session = host.ssh().expect();
 					session.sendLine(
 					    String.format(

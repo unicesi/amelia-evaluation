@@ -23,7 +23,7 @@ package co.edu.icesi.driso.matrices
 
 import co.edu.icesi.driso.matrices.classes.Strategy
 
-includes Common
+includes co.edu.icesi.driso.matrices.Common
 
 /*
  * Compile each strategy's source code.

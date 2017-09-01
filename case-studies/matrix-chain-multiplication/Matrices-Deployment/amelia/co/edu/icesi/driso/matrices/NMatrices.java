@@ -1,5 +1,6 @@
 package co.edu.icesi.driso.matrices;
 
+import co.edu.icesi.driso.matrices.Common;
 import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,6 +16,9 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+/**
+ * Execute the NMatrices multiplication strategy.
+ */
 @SuppressWarnings("all")
 public class NMatrices extends Subsystem.Deployment {
   private String common;
@@ -23,7 +27,7 @@ public class NMatrices extends Subsystem.Deployment {
   
   private Iterable<String> libpath;
   
-  private co.edu.icesi.driso.matrices.Common $co$edu$icesi$driso$matrices$Common;
+  private Common $co$edu$icesi$driso$matrices$Common;
   
   public final CommandDescriptor[] init = new CommandDescriptor[1];
   
@@ -87,21 +91,27 @@ public class NMatrices extends Subsystem.Deployment {
     init[0].runsOn(hosts0);
     List<Host> hosts1 = Lists.newArrayList(getHost1());
     knowledge[0].runsOn(hosts1);
-    knowledge[0].dependsOn(init[0]);processor7[0].runsOn(hosts1);
+    knowledge[0].dependsOn(init[0]);
+    processor7[0].runsOn(hosts1);
     processor7[0].dependsOn(knowledge[0]);
     List<Host> hosts2 = Lists.newArrayList(getHost2());
     processor1[0].runsOn(hosts2);
-    processor1[0].dependsOn(knowledge[0]);processor2[0].runsOn(hosts2);
-    processor2[0].dependsOn(knowledge[0]);distributor[0].runsOn(hosts2);
+    processor1[0].dependsOn(knowledge[0]);
+    processor2[0].runsOn(hosts2);
+    processor2[0].dependsOn(knowledge[0]);
+    distributor[0].runsOn(hosts2);
     distributor[0].dependsOn(dispatcher[0]);
     List<Host> hosts3 = Lists.newArrayList(getHost3());
     processor3[0].runsOn(hosts3);
-    processor3[0].dependsOn(knowledge[0]);processor4[0].runsOn(hosts3);
+    processor3[0].dependsOn(knowledge[0]);
+    processor4[0].runsOn(hosts3);
     processor4[0].dependsOn(knowledge[0]);
     List<Host> hosts4 = Lists.newArrayList(getHost4());
     processor5[0].runsOn(hosts4);
-    processor5[0].dependsOn(knowledge[0]);processor6[0].runsOn(hosts4);
-    processor6[0].dependsOn(knowledge[0]);dispatcher[0].runsOn(hosts4);
+    processor5[0].dependsOn(knowledge[0]);
+    processor6[0].runsOn(hosts4);
+    processor6[0].dependsOn(knowledge[0]);
+    dispatcher[0].runsOn(hosts4);
     dispatcher[0].dependsOn(processor1[0], processor2[0], processor3[0], processor4[0], processor5[0], processor6[0], processor7[0]);
     List<Host> hosts5 = Lists.newArrayList(getHost5());
     control[0].runsOn(hosts5);

@@ -24,9 +24,9 @@ package co.edu.icesi.driso.matrices
 import java.util.List
 import org.amelia.dsl.lib.descriptors.Host
 
-includes Common
+includes co.edu.icesi.driso.matrices.Common
 
-depends on Allocation
+depends on co.edu.icesi.driso.matrices.Allocation
 
 /*
  * Execute the BlockReduce multiplication strategy.

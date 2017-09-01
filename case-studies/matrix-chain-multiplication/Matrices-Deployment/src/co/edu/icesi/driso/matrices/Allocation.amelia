@@ -25,9 +25,9 @@ import co.edu.icesi.driso.matrices.classes.SCPLogin
 import java.util.List
 import org.amelia.dsl.lib.descriptors.Host
 
-includes Common
+includes co.edu.icesi.driso.matrices.Common
 
-depends on Compile
+depends on co.edu.icesi.driso.matrices.Compile
 
 subsystem Allocation {
 

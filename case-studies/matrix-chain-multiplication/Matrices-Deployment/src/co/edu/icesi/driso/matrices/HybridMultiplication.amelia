@@ -21,9 +21,9 @@
  */
 package co.edu.icesi.driso.matrices
 
-includes Common
+includes co.edu.icesi.driso.matrices.Common
 
-depends on Allocation
+depends on co.edu.icesi.driso.matrices.Allocation
 
 /*
  * Execute the Hybrid multiplication strategy.

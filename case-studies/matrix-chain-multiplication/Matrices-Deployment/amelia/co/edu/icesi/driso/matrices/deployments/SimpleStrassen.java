@@ -21,6 +21,10 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+/**
+ * Deploy the Strassen strategy once and then
+ * stop the executed components.
+ */
 @SuppressWarnings("all")
 public class SimpleStrassen {
   private HashMap<String, List<Subsystem>> ＿subsystems = new HashMap<String, List<Subsystem>>();

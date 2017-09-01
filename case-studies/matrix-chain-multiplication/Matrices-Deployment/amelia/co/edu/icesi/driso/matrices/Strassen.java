@@ -1,5 +1,6 @@
 package co.edu.icesi.driso.matrices;
 
+import co.edu.icesi.driso.matrices.Common;
 import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +13,9 @@ import org.amelia.dsl.lib.util.Arrays;
 import org.amelia.dsl.lib.util.Commands;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
+/**
+ * Execute the Strassen multiplication strategy.
+ */
 @SuppressWarnings("all")
 public class Strassen extends Subsystem.Deployment {
   private String common;
@@ -20,7 +24,7 @@ public class Strassen extends Subsystem.Deployment {
   
   private Iterable<String> libpath;
   
-  private co.edu.icesi.driso.matrices.Common $co$edu$icesi$driso$matrices$Common;
+  private Common $co$edu$icesi$driso$matrices$Common;
   
   public final CommandDescriptor[] cdRun = new CommandDescriptor[2];
   

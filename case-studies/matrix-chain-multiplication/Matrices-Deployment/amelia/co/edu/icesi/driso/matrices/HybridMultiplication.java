@@ -1,5 +1,6 @@
 package co.edu.icesi.driso.matrices;
 
+import co.edu.icesi.driso.matrices.Common;
 import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +13,9 @@ import org.amelia.dsl.lib.util.Arrays;
 import org.amelia.dsl.lib.util.Commands;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
+/**
+ * Execute the Hybrid multiplication strategy.
+ */
 @SuppressWarnings("all")
 public class HybridMultiplication extends Subsystem.Deployment {
   private String common;
@@ -20,7 +24,7 @@ public class HybridMultiplication extends Subsystem.Deployment {
   
   private Iterable<String> libpath;
   
-  private co.edu.icesi.driso.matrices.Common $co$edu$icesi$driso$matrices$Common;
+  private Common $co$edu$icesi$driso$matrices$Common;
   
   public final CommandDescriptor[] reducer0 = new CommandDescriptor[1];
   
@@ -66,7 +70,9 @@ public class HybridMultiplication extends Subsystem.Deployment {
     $co$edu$icesi$driso$matrices$Common.setup();
     init();
     List<Host> hosts0 = Lists.newArrayList(getHost0());
-    reducer0[0].runsOn(hosts0);reducer1[0].runsOn(hosts0);control[0].runsOn(hosts0);
+    reducer0[0].runsOn(hosts0);
+    reducer1[0].runsOn(hosts0);
+    control[0].runsOn(hosts0);
     control[0].dependsOn(reducer0[0], reducer1[0], reducer2[0], reducer3[0], reducer4[0], reducer5[0]);
     List<Host> hosts1 = Lists.newArrayList(getHost1());
     reducer2[0].runsOn(hosts1);
