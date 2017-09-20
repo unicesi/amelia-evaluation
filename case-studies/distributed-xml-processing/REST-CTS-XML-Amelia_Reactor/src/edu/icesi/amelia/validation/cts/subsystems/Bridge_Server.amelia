@@ -2,7 +2,7 @@ package edu.icesi.amelia.validation.cts.subsystems
 
 import org.amelia.dsl.lib.descriptors.Host
 
-depends on StoreProcedures
+depends on edu.icesi.amelia.validation.cts.subsystems.StoreProcedures
 
 subsystem Bridge_Server {
 	

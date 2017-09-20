@@ -3,7 +3,7 @@ package edu.icesi.amelia.validation.cts.subsystems
 import java.util.List
 import org.amelia.dsl.lib.descriptors.Host
 
-depends on LoadBalancer
+depends on edu.icesi.amelia.validation.cts.subsystems.LoadBalancer
 
 subsystem Directory {
 	

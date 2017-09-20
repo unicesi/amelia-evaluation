@@ -2,7 +2,7 @@ package edu.icesi.amelia.validation.cts.monitors
 
 import org.amelia.dsl.lib.descriptors.Host
 
-depends on Monitor_8
+depends on edu.icesi.amelia.validation.cts.monitors.Monitor_8
 
 subsystem Monitor_9
 {
