@@ -81,7 +81,7 @@
 \newcommand{\Qitem}[2][]{% #1 optional, #2 notwendig
 \ifthenelse{\equal{#1}{}}{\stepcounter{itemnummer}}{}
 \ifthenelse{\equal{#1}{a}}{\stepcounter{itemnummer}}{}
-\begin{enumerate}[topsep=2pt,leftmargin=2.8em]
+\begin{enumerate}[topsep=2pt,leftmargin=0em]
 \item[\textbf{\arabic{itemnummer}#1.}] #2
 \end{enumerate}
 }
