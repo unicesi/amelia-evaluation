@@ -6,7 +6,9 @@
 \usepackage{color}
 \usepackage{textcomp} % straight single quotes
 \usepackage{comment}
+\usepackage[T1]{fontenc}
 \newcommand\amelia[0]{\textsc{Amelia}}
+
 
 
 % ====================================================================
@@ -172,7 +174,7 @@ The BlockReduce consiguration strategy consists in splitting each matrix into fi
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{fig/evaluation/hybrid-deployment}
+	\includegraphics[width=1\textwidth]{fig/evaluation/matrices-hybrid}
 	\caption[]{Deployment Diagram for the Hybrid Configuration Strategy}
 	\label{fig:apx-eval-amelia-hybrid}
 \end{figure}
@@ -196,7 +198,7 @@ practical guide you will be given an overview of the language syntax and the ass
 \subsection{Requirement 1 (Example)}
 \label{subsect:apx-amelia-example-1}
 
-Specify the deployment of the BlockReduce strategy having into account component dependencies and the computing nodes specified in the deployment diagram. You may use the following file containing a mapping between the hosts in the deployment diagrams and the laboratory's computers. 
+Specify the deployment of the BlockReduce and Hybrid strategies having into account component dependencies and the computing nodes specified in the deployment diagram. You may use the following file containing a mapping between the hosts in the deployment diagrams and the laboratory's computers. \\
 
 \begin{lstlisting}[style=common,caption=hosts.txt]
 hgrid1	21	22	root	liasondriso_hgrid1	grid0
@@ -285,6 +287,8 @@ subsystem Common {
 
 \end{lstlisting}
 
+As you probably noted, \amelia{} allows string interpolation through the use of guillemet symbols (\guillemotleft\guillemotright) between single quotation marks. Since string interpolation makes reading code much easier, especially when the string is part of a command declaration, string interpolations should be used instead of string concatenation. 
+
 \subsubsection{Compiling sources with \amelia{}}
 
 Since the addressed problem comprises multiple deployment strategies, we must compile certain software project sources for generating the desired specific artifacts to be deployed. In contemplation of standardization, we define a Java Enum for defining the possible deployment configurations for the matrix-chain multiplication problem. \\
@@ -308,44 +312,7 @@ public enum Strategy {
 
 \end{lstlisting}
 
-\begin{lstlisting}[style=amelia,caption=Deployment for BlockReduce]
-package co.edu.icesi.driso.matrices.deployments
-
-import co.edu.icesi.driso.matrices.classes.Strategy
-import java.util.List
-import java.util.Map
-import org.amelia.dsl.lib.descriptors.Host
-import org.amelia.dsl.lib.util.Hosts
-
-includes co.edu.icesi.driso.matrices.Common
-includes co.edu.icesi.driso.matrices.Compile
-includes co.edu.icesi.driso.matrices.Allocation
-includes co.edu.icesi.driso.matrices.BlockReduce
-
-/*
- * Deploy the BlockReduce strategy once and then
- * stop the executed components.
- */
-deployment SimpleBlockReduce {
-	// Load all hosts and then filter
-	val Map<String, Host> hosts = Hosts.hosts("hosts.txt").toMap[h|h.identifier]
-	val List<Host> executionHosts = #[
-	   hosts.get("grid1"), hosts.get("grid2"), hosts.get("grid3"),
-	   hosts.get("grid4"), hosts.get("grid5"), hosts.get("grid6")
-	]
-
-	// Add subsystems to deploy
-	add(new Common(hosts))
-	add(new Compile(Strategy.BLOCK_REDUCE, hosts))
-	add(new Allocation(executionHosts, hosts))
-	add(new BlockReduce(executionHosts, hosts))
-
-	// Deploy and then stop the executed components
-	start(true)
-}
-\end{lstlisting}
-
-We defined a subsystem called \textit{Compile} for the compilation of the associated source projects. This subsystem has a parameter for indicating the desired deployment strategy to be compiled. \\
+We defined a subsystem called \textit{Compile} for the compilation of the associated source projects. This subsystem has a parameter for indicating the desired deployment strategy to be compiled. When defining the compilation subsystem, we can include the \textit{Common} subsystem that we have created previously through the clause \textit{includes}. All of the variables and rules defined in the \textit{Common} subsystem can be reused in the new \textit{Compile} subsystem, either to declare new variables or for defining new rules. This allows to avoid duplicating code and promotes reusability and composability concerns. For sake of simplicity, once artifacts have been generated, we need to place them in a shared folder. Therefore, we need to specify a dependency between two rules in the subsystem (compilation and relocation). \amelia{} supports this through the use of a colon symbol (:) separating the rules, following a pattern like \textit{dependantRule}:\textit{ruleDependency}. \\
 
 \begin{lstlisting}[style=amelia,caption=Subsystem \textit{Compile} for compiling the source code.]
 package co.edu.icesi.driso.matrices
@@ -404,7 +371,7 @@ subsystem Compile {
 
 \subsubsection{Artifacts transportation with \amelia{}}
 
-Once artifacts have generated from source code, they need to be transported (along with dependency libraries) to the computing nodes where they are going to be deployed. \amelia{} supports this requirement through the use of a command called \textit{scp}, nevertheless, in order to work, this command requires the configuration of an FTP Server. For sake of simplicity, we decided to exploit the extensibility of \amelia{} and created a new user-defined command that leverage the SSH-based secure copy command of Linux. For this purpose, we created a new class which contains a method for describing the user-defined \amelia{} command.
+Once artifacts have been generated from source code, they need to be transported (along with dependency libraries) to the computing nodes where they will be deployed. \amelia{} supports this requirement through the use of a command called \textit{scp}, nevertheless, in order to work, this command requires the configuration of an FTP Server. For sake of simplicity, we decided to exploit the extensibility of \amelia{} and created a new user-defined command that leverage the SSH-based secure copy command of Linux. For this purpose, we created a new class which contains a method for describing the user-defined \amelia{} command. \\
 
 \begin{lstlisting}[style=amelia,caption=Class for defining a user-defined \amelia{} command.]
 package co.edu.icesi.driso.matrices.classes;
@@ -463,7 +430,7 @@ public class SCPLogin {
 
 \end{lstlisting}
 
-With that in mind, we proceed to define a subsystem called \textit{Allocation} that allows the transportation of compiled artifacts and dependency libraries to the computing nodes where they will be deployed, i.e., the subsystem allocate software artifacts to executing computing nodes. This subsystem uses the user-defined command described previously.
+With that in mind, we proceed to define a subsystem called \textit{Allocation} that allows the transportation of compiled artifacts and dependency libraries to the computing nodes where they will be deployed, i.e., the subsystem allocates software artifacts to executing computing nodes. This subsystem uses the user-defined command described previously. Transportation would not be possible if compilation was not successful. \amelia{} allows to model this requirement through the specification of dependencies between subsystems and rules. For dependencies between subsystems, it is necessary to specify the \textit{depends on} clause in conjunction with the subsystem in need for indicating that the dependant subsystem would not instantiated until its dependencies complete their execution. \\
 
 \begin{lstlisting}[style=amelia,caption=Subsystem for artifacts allocation to computing nodes.]
 package co.edu.icesi.driso.matrices
@@ -493,7 +460,7 @@ subsystem Allocation {
 }
 \end{lstlisting}
 
-Once we granted the compilation and transportation of artifacts to the computing nodes that will execute them, we proceed to define two subsystems called \textit{BlockReduce} and \textit{Hybrid} that execute their associated strategy. \\
+Once we granted the compilation and transportation of artifacts to the computing nodes that will execute them, we proceed to define two subsystems called \textit{BlockReduce} and \textit{Hybrid} that will execute their associated strategy. \\
 
 \subsubsection{Execution of BlockReduce strategy}
 
@@ -620,11 +587,11 @@ subsystem HybridMultiplication {
 }
 \end{lstlisting}
 
-Finally, we proceed to define one custom deployment for each strategy to be deployed. The custom deployment uses the subsystems defined previously. \\
+Finally, we proceed to define one custom deployment for each strategy to be deployed. The custom deployment includes the subsystems defined previously and contains control flow statements that execute the deployment of a set of subsystems in a particular way. \\
 
-\subsubsection{Custom deployment for BlocReduce strategy}
+\subsubsection{Custom deployment for the BlockReduce strategy}
 
-\begin{lstlisting}[style=amelia,caption=Custom deployment for BlockReduce strategy]
+\begin{lstlisting}[style=amelia,caption=Custom deployment for BlockReduce strategy.]
 package co.edu.icesi.driso.matrices.deployments
 
 import co.edu.icesi.driso.matrices.classes.Strategy
@@ -661,9 +628,9 @@ deployment SimpleBlockReduce {
 }
 \end{lstlisting}
 
-\subsubsection{Custom deployment for Hybrid strategy}
+\subsubsection{Custom deployment for the Hybrid strategy}
 
-\begin{lstlisting}[style=amelia,caption=Custom deployment for Hybrid strategy]
+\begin{lstlisting}[style=amelia,caption=Custom deployment for Hybrid strategy.]
 package co.edu.icesi.driso.matrices.deployments
 
 import co.edu.icesi.driso.matrices.classes.Strategy
