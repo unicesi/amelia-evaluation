@@ -163,7 +163,7 @@ The monolithic Strassen configuration strategy considers only a multiplication c
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{fig/evaluation/blockreduce-deployment}
+	\includegraphics[width=1\textwidth]{fig/evaluation/matrices-blockreduce}
 	\caption[]{Deployment Diagram for the BlockReduce Configuration Strategy}
 	\label{fig:apx-eval-amelia-blockreduce}
 \end{figure}
@@ -668,16 +668,28 @@ deployment SimpleHybridMultiplication {
 \end{lstlisting}
 
  
-\begin{comment} 
- 
 \subsection{Requirement 2 (Example)}
 
-Specify the deployment of the Strassen strategy having into account component dependencies and the computing nodes specified in the deployment diagram. The deployment must be repeated ten times sequentially and retry on failure. \\
+Specify the deployment of the BlockReduce strategy having into account that every execution node must compile the sources that will run on it. \\
 
-In this case we can reuse the specifications from Example \ref{subsect:apx-amelia-example-1} and specify only a custom deployment strategy that meets the requirement. The sequential deployments can be achieved using a \texttt{for} statement, and the retry-on-failure feature can be implemented using the \texttt{RetryableDeployment} utility class. \\
+\subsubsection{Redefine the custom deployments}
 
-\end{comment}
+Assuming that we can easily define an appropriate folder hierarchy in a convenient distributed file system (e.g., NFS), which could be accessed by every executing node for compiling the source code, we can take advantage of the multiple instances of a subsystem that a custom deployment can manage for meeting this requirement. For this, although it may be necessary to change some paths and subsystem dependencies, we essentially need to add the following lines to the custom deployment of the strategy. \\
 
+\begin{lstlisting}[style=amelia,caption=Redefining custom deployments.]
+
+//Number of execution nodes.
+val Integer numNodes = 5
+
+//Actual compilation host.
+val List<Host> compileHost = null
+
+for(1:1..numNodes)
+{
+compileHost = executionHosts.get(i);
+add(new Compile(Strategy.BLOCK_REDUCE, compileHost))
+}
+\end{lstlisting}
 
 \bibliographystyle{plain}
 \bibliography{References}
