@@ -5,7 +5,7 @@ The original system, which was designed for processing XML documents for differe
 
 The following table summarizes the factors and their corresponding values of variation for the experimental design of the project. Each treatment, i.e., a combination between factor values, was implemented as a set of Amelia specifications.
 
-|           Factor          |           Levels           |
+|           Factor          |           Values           |
 |:-------------------------:|:--------------------------:|
 | Communications protocol   |       RMI, REST, Ice       |
 | Pattern                   | Producer/Consumer, Reactor |
