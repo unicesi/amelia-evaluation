@@ -1,1 +1,6 @@
+
 # Matrices Project.
+
+This folder contains the Amelia specifications for the automated deployment process of the Matrices Case Study. The Matrix-Chain Multiplication (MCM) problem is an optimization problem that consists in finding the most efficient multiplication sequence to multiply a set of given matrices. Our implementation to solve the MCM splits the problem into three different subproblems: the matrix-pair multiplication problem, the matrix-chain parenthesization problem, which finds the optimal sequence of matrix-pair multiplications minimizing the total number of additions and multiplications, and the matrix-subchain multiplication scheduling problem, which finds subsets of matrix multiplications that can be performed concurrently to decrease the overall multiplication time. 
+
+In this implementation of the MCM solution, we take advantage of distributed computational resources in order to reduce the execution time when multiplying a large number of considerably big matrices. To this end, we developed multiple multiplication strategies (Strassen strategy, BlockReduceStrategy, N-Matrices Strategy, and Hybrid Configuration Strategy), based on the map-reduce paradigm, and variations of it that significantly reduces network usage. At the end, local multiplications are performed using the Strassen algorithm. 
