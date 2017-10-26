@@ -13,5 +13,6 @@ The following table depicts the factors and their corresponding levels for the e
 | Processor nodes instances |          4, 8, 12*         |
 | Components per node       |          1, 4**, 6, 8**, 12|
 | XML file size             |          1MB, 5MB          |
+
 *The Reactor pattern is always specified with 12 processor nodes.
 **These levels are not combined with the whole resultant set of levels, instead, they produce the following treatments: Communication protocol: RMI, Producer/Consumer,12 nodes, 4 components per node, XML file with 1MB size; Communication protocol: RMI, Producer/Consumer,12 nodes, 8 components per node, XML file with 1MB size ; and Communication protocol: Ice, Producer/Consumer,12 nodes, 8 components per node, XML file with 1MB size
