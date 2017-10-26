@@ -34,39 +34,39 @@ subsystem Compile {
     */
 	param Strategy strategy
 
-	on compilationHost {	 
+	on Common.compilationHost {	 
 		compileCommon:
-			cd sources.get(0)
+			cd Common.sources.get(0)
 			compile "src" "mcm-common"
-			cmd 'yes | cp -f mcm-common.jar «builtFolder»/'
+			cmd 'yes | cp -f mcm-common.jar «Common.builtFolder»/'
 	}
 
-	on compilationHost ? strategy == Strategy.BLOCK_REDUCE {
+	on Common.compilationHost ? strategy == Strategy.BLOCK_REDUCE {
 		strategy1: compileCommon;
-			cd sources.get(1)
-			compile "src" "mcm-blockreduce" -classpath '«builtFolder»/mcm-common.jar'
-			cmd 'yes | cp -f mcm-blockreduce.jar «builtFolder»'
+			cd Common.sources.get(1)
+			compile "src" "mcm-blockreduce" -classpath '«Common.builtFolder»/mcm-common.jar'
+			cmd 'yes | cp -f mcm-blockreduce.jar «Common.builtFolder»'
 	}
 
-	on compilationHost ? strategy == Strategy.HYBRID_MULTIPLICATION {
+	on Common.compilationHost ? strategy == Strategy.HYBRID_MULTIPLICATION {
 		strategy2: compileCommon;
-			cd sources.get(2)
-			compile "src" "mcm-hybrid-multiplication" -classpath '«builtFolder»/mcm-common.jar'
-			cmd 'yes | cp -f mcm-hybrid-multiplication.jar «builtFolder»'
+			cd Common.sources.get(2)
+			compile "src" "mcm-hybrid-multiplication" -classpath '«Common.builtFolder»/mcm-common.jar'
+			cmd 'yes | cp -f mcm-hybrid-multiplication.jar «Common.builtFolder»'
 	}
 
-	on compilationHost ? strategy == Strategy.N_MATRICES {
+	on Common.compilationHost ? strategy == Strategy.N_MATRICES {
 		strategy3: compileCommon;
-			cd sources.get(3)
-			compile "src" "mcm-nmatrices" -classpath '«builtFolder»/mcm-common.jar'
-			cmd 'yes | cp -f mcm-nmatrices.jar «builtFolder»'
+			cd Common.sources.get(3)
+			compile "src" "mcm-nmatrices" -classpath '«Common.builtFolder»/mcm-common.jar'
+			cmd 'yes | cp -f mcm-nmatrices.jar «Common.builtFolder»'
 	}
 
-	on compilationHost ? strategy == Strategy.STRASSEN {
+	on Common.compilationHost ? strategy == Strategy.STRASSEN {
 		strategy4: compileCommon;
-			cd sources.get(4)
-			compile "src" "mcm-strassen" -classpath '«builtFolder»/mcm-common.jar'
-			cmd 'yes | cp -f mcm-strassen.jar «builtFolder»'
+			cd Common.sources.get(4)
+			compile "src" "mcm-strassen" -classpath '«Common.builtFolder»/mcm-common.jar'
+			cmd 'yes | cp -f mcm-strassen.jar «Common.builtFolder»'
 	}
 
 }

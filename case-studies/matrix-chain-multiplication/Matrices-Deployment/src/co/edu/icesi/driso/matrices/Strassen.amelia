@@ -33,13 +33,13 @@ subsystem Strassen {
 	var String common = "mcm-common"
 	var String artifact = "mcm-strassen"
 	var Iterable<String> libpath = #[
-        '«builtsFolder»/«artifact».jar',
-        '«builtsFolder»/«common».jar'
+        '«Common.builtsFolder»/«artifact».jar',
+        '«Common.builtsFolder»/«common».jar'
 	]
 	
-	on hosts.get("grid1") {
+	on Common.hosts.get("grid1") {
 		cdRun:
-			cd builtsFolder
+			cd Common.builtsFolder
 			run "Strassen" -libpath libpath
 	}
 	

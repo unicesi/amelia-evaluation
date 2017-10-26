@@ -33,18 +33,18 @@ subsystem NMatrices {
 	var String common = "mcm-common"
 	var String artifact = "mcm-nmatrices"
 	var Iterable<String> libpath = #[
-	 '«builtsFolder»/«common».jar',
-	 '«builtsFolder»/«artifact».jar'
+	 '«Common.builtsFolder»/«common».jar',
+	 '«Common.builtsFolder»/«artifact».jar'
 	]
 	
-	on hosts.values.filter[h|#[
+	on Common.hosts.values.filter[h|#[
 	   "grid11", "grid1", "grid2", "grid7", "grid5"
     ].contains(h.identifier)] {
 		init:
-			cd builtsFolder
+			cd Common.builtsFolder
 	}
 	
-	on hosts.get("grid11") {
+	on Common.hosts.get("grid11") {
 		knowledge: init;
 			run "KnowledgeBase" -libpath libpath
 
@@ -52,7 +52,7 @@ subsystem NMatrices {
 			run "Processor7" -libpath libpath
 	}
 	
-	on hosts.get("grid1") {
+	on Common.hosts.get("grid1") {
 		processor1: knowledge;
 			run "Processor1" -libpath libpath
 
@@ -63,7 +63,7 @@ subsystem NMatrices {
 			run "Distributor" -libpath libpath
 	}
 	
-	on hosts.get("grid2") {
+	on Common.hosts.get("grid2") {
 		processor3: knowledge;
 			run "Processor3" -libpath libpath
 
@@ -71,7 +71,7 @@ subsystem NMatrices {
 			run "Processor4" -libpath libpath
 	}
 	
-	on hosts.get("grid7") {
+	on Common.hosts.get("grid7") {
 		processor5: knowledge;
 			run "Processor5" -libpath libpath
 
@@ -84,7 +84,7 @@ subsystem NMatrices {
 			run "Dispatcher" -libpath libpath
 	}
 	
-	on hosts.get("grid5") {
+	on Common.hosts.get("grid5") {
 		control: distributor;
 			run "Control" -libpath libpath
 	}
