@@ -1,0 +1,164 @@
+/**
+ * Copyright 2017 Universidad Icesi
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the 'Software'), to
+ * deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ */
+package co.edu.icesi.driso.amelia.carvajal.xml.large.shared
+
+import org.amelia.dsl.lib.descriptors.Host
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.PatternEnum
+import static extension org.amelia.dsl.examples.Util.warn
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.CommunicationProtocolEnum
+import co.edu.icesi.driso.amelia.carvajal.xml.large.shared.ice.classes.IceInteraction
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.ComponentInstancesEnum
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.NodeInstancesEnum
+
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.common.CommonExecution
+
+depends on co.edu.icesi.driso.amelia.carvajal.xml.large.shared.StoreProcedure
+
+
+subsystem Server
+{
+	
+	//The protocol used for components communication
+	param CommunicationProtocolEnum protocol
+	
+	//The pattern to be executed
+	param PatternEnum pattern
+	
+	//The host where Bridge and Server will be executed.
+	param Host hostBridgeServer
+	
+	//The host where Intermediate will be executed.
+	param Host hostIntermediate
+	
+	//The folder where artifacts are located.
+	param String artifactsFolder
+	
+	//The number of components to be executed per node
+	param ComponentInstancesEnum numComponents
+	
+	//The number of nodes to be managed by the bridge
+	param NodeInstancesEnum numNodes
+	
+	//The name of the intermediate artifact
+	param String intermediateArtifactName
+	
+	on hostBridgeServer
+	{
+	
+		changeDirectoryBridgeServer:
+		
+			cd artifactsFolder
+		
+		/*
+		 * Executions for Bridge.
+		 */
+		
+		activateBridgePC ? pattern == PatternEnum.PC && (protocol == CommunicationProtocolEnum.RMI || protocol == CommunicationProtocolEnum.REST) : changeDirectoryBridgeServer;
+		
+			(run 'procedimientos_bridge' -libpath #[
+				'«CommonExecution.builtFolder»/«CommonExecution.artifactName»',
+				'«CommonExecution.libraryFolder»/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar',
+				'«CommonExecution.libraryFolder»/new-personalized-events-with-carvajal.jar',
+				'«CommonExecution.libraryFolder»/ojdbc6.jar',
+				'«CommonExecution.libraryFolder»/vtd-xml.jar'
+				] ... => [withoutTimeout]
+			).warn('Executing the Bridge component... This may take several minutes')
+			
+		activateBridgeReactor ? pattern == PatternEnum.REACTOR && (protocol == CommunicationProtocolEnum.RMI || protocol == CommunicationProtocolEnum.REST) : changeDirectoryBridgeServer;
+		
+			(run 'procedimientos_bridge_«numComponents.value()»' -libpath #[
+				'«CommonExecution.builtFolder»/«CommonExecution.artifactName»',
+				'«CommonExecution.libraryFolder»/vtd-xml.jar',
+				'«CommonExecution.libraryFolder»/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar',
+				'«CommonExecution.libraryFolder»/new-personalized-events-with-carvajal.jar',
+				'«CommonExecution.libraryFolder»/ojdbc6.jar',
+				'«CommonExecution.libraryFolder»/javax.ws.rs-api-2.0.jar',
+				'«CommonExecution.libraryFolder»/commons-codec-1.10.jar',
+				'«CommonExecution.libraryFolder»/xdb6.jar'
+				] ... => [withoutTimeout]
+			).warn('Executing the Bridge component... This may take several minutes')
+				
+		activateXMLProcessorPCIce ? pattern == PatternEnum.PC && protocol == CommunicationProtocolEnum.ICE : changeDirectoryBridgeServer;
+		
+			IceInteraction.runXmlProcessorIce('xmlProcessor')
+			
+		activateBrigeReactorIce	? pattern == PatternEnum.REACTOR && protocol == CommunicationProtocolEnum.ICE : changeDirectoryBridgeServer;
+		
+			IceInteraction.runBridgeIce('bridgeXml_12_«numComponents.value()»')
+		
+		
+		/*
+		 * Executions for Server
+		 */
+			
+		activateServerPC ? pattern == PatternEnum.PC && (protocol == CommunicationProtocolEnum.RMI || protocol == CommunicationProtocolEnum.REST) : activateIntermediate;
+		
+			run 'procedimientos_server' -libpath #[
+				'«CommonExecution.builtFolder»/«CommonExecution.artifactName»',
+				'«CommonExecution.libraryFolder»/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar',
+				'«CommonExecution.libraryFolder»/new-personalized-events-with-carvajal.jar',
+				'«CommonExecution.libraryFolder»/javax.ws.rs-api-2.0.jar',
+				'«CommonExecution.libraryFolder»/commons-codec-1.10.jar'
+			]
+				
+		
+		activateServerReactor ? pattern == PatternEnum.REACTOR && (protocol == CommunicationProtocolEnum.RMI || protocol == CommunicationProtocolEnum.REST) : activateBridgeReactor;
+		
+			run 'procedimientos_server' -libpath #[
+				'«CommonExecution.builtFolder»/«CommonExecution.artifactName»',
+				'«CommonExecution.libraryFolder»/vtd-xml.jar',
+				'«CommonExecution.libraryFolder»/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar',
+				'«CommonExecution.libraryFolder»/new-personalized-events-with-carvajal.jar',
+				'«CommonExecution.libraryFolder»/ojdbc6.jar',
+				'«CommonExecution.libraryFolder»/javax.ws.rs-api-2.0.jar',
+				'«CommonExecution.libraryFolder»/commons-codec-1.10.jar',
+				'«CommonExecution.libraryFolder»/xdb6.jar'
+			]
+			
+		activateServerIce ? protocol == CommunicationProtocolEnum.ICE : activateIntermediateIce,activateBrigeReactorIce;
+		
+			IceInteraction.runServerIce("server")
+	}
+	
+	on hostIntermediate ? pattern == PatternEnum.PC
+	{
+		
+		changeDirectoryIntermediate:
+		
+			cd artifactsFolder
+		
+		activateIntermediate ? protocol == CommunicationProtocolEnum.RMI || protocol == CommunicationProtocolEnum.REST :activateBridgePC,changeDirectoryIntermediate;
+		
+			(run 'procedimientos_intermediate_control_«numNodes.value()»_«numComponents.value()»' -libpath #[
+			'«CommonExecution.builtFolder»/«intermediateArtifactName»',
+			'«CommonExecution.libraryFolder»/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar',
+			'«CommonExecution.libraryFolder»/new-personalized-events-with-carvajal.jar'
+			] -s 'r' -m 'run' ... => [withoutTimeout])
+			.warn('Executing the Intermediate component... This may take several minutes') 
+		
+		activateIntermediateIce ? protocol == CommunicationProtocolEnum.ICE :activateXMLProcessorPCIce,changeDirectoryIntermediate;
+		
+			IceInteraction.runIntermediateIce('intermediate_Control_«numNodes.value()»_«numComponents.value()»')
+	}
+	
+	
+}

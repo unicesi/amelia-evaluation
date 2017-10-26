@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: CTS-XML-Amelia
-Bundle-SymbolicName: CTS-XML-Amelia_PC
-Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.amelia.dsl.lib.osgi;bundle-version="0.5.0",
- org.eclipse.xtend.lib;bundle-version="2.9.1"
-Import-Package: org.eclipse.xtext.xbase.lib

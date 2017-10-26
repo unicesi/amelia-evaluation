@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Distributed-xml-processing
+Bundle-SymbolicName: distributed-xml-processing-amelia
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.amelia.dsl.lib.osgi;bundle-version="0.14.17",
+ org.eclipse.xtend.lib;bundle-version="2.12.0"

@@ -1,0 +1,219 @@
+/**
+ * Copyright 2017 Universidad Icesi
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to
+ * deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ */
+package co.edu.icesi.driso.amelia.carvajal.xml.large.shared
+
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.PatternEnum
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.CommunicationProtocolEnum
+import co.edu.icesi.driso.amelia.carvajal.xml.large.shared.ice.classes.IceInteraction
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.ComponentInstancesEnum
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.NodeInstancesEnum
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.DatabaseConnectionTypeEnum
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.ArtifactsNamesEnum
+
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.common.CommonSpecification
+
+depends on co.edu.icesi.driso.amelia.carvajal.xml.large.shared.Database
+
+/*
+ * This subsystem allows to compile a specific strategy.
+ */
+subsystem Compilation
+{
+	
+	/* 
+	 * The protocol used for components communication
+	 * */
+	param CommunicationProtocolEnum protocol
+	
+	/*
+	 * The pattern to be compiled.
+	 */
+	param PatternEnum pattern
+	
+	
+	//The folder where source code is located.
+	param String sourcesFolder
+	
+	
+	//The folder where monitorng source code is located.
+	param String monitoringSourcesFolder
+	
+	//The folder where compiled artifacts will be located.
+	param String compilationFolder
+	
+	/*
+	 * The number of slave nodes to be deployed.
+	 */
+	param NodeInstancesEnum numNodes
+	
+	/*
+	 * The number of components that will be deployed on each slave node.
+	 */
+	param ComponentInstancesEnum numComponents
+	
+	/* 
+	 *The database connection used by components.
+	 * */
+	param DatabaseConnectionTypeEnum dbConnection
+	
+	//Compiles only when the communication protocol is RMI or REST
+	
+	on CommonSpecification.host ? protocol == CommunicationProtocolEnum.RMI || protocol == CommunicationProtocolEnum.REST
+	{
+	
+	compilePCSources ? pattern == PatternEnum.PC: changeDirectory;
+		
+		compile '«sourcesFolder»/Server/src' '«sourcesFolder»/«compilationFolder»/«ArtifactsNamesEnum.SERVER.value(protocol)»' -classpath #[
+		'«sourcesFolder»/lib/vtd-xml.jar',
+		'«sourcesFolder»/lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar',
+		'«sourcesFolder»/lib/new-personalized-events-with-carvajal.jar',
+		'«sourcesFolder»/lib/ojdbc6.jar',
+		'«sourcesFolder»/lib/javax.ws.rs-api-2.0.jar',
+		'«sourcesFolder»/lib/commons-codec-1.10.jar',
+		'«sourcesFolder»/lib/xdb6.jar']
+
+		compile '«sourcesFolder»/IntermediateControl/src' '«sourcesFolder»/«compilationFolder»/«ArtifactsNamesEnum.INTERMEDIATE.value(protocol)»' -classpath #[
+		'«sourcesFolder»/lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar',
+		'«sourcesFolder»/lib/new-personalized-events-with-carvajal.jar']
+		
+		compile '«sourcesFolder»/Queue/src' '«sourcesFolder»/«compilationFolder»/«ArtifactsNamesEnum.QUEUE.value(protocol)»' -classpath #[
+		'«sourcesFolder»/lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar',
+		'«sourcesFolder»/lib/new-personalized-events-with-carvajal.jar']
+		
+		compileReactorSources ? pattern == PatternEnum.REACTOR: changeDirectory;
+		
+		compile '«sourcesFolder»/Server/src' '«sourcesFolder»/«compilationFolder»/«ArtifactsNamesEnum.SERVER_REACTOR.value(protocol)»' -classpath #[
+					'«sourcesFolder»/lib/vtd-xml.jar',
+					'«sourcesFolder»/lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar',
+					'«sourcesFolder»/lib/new-personalized-events-with-carvajal.jar',
+					'«sourcesFolder»/lib/ojdbc6.jar',
+					'«sourcesFolder»/lib/javax.ws.rs-api-2.0.jar',
+					'«sourcesFolder»/lib/commons-codec-1.10.jar',
+					'«sourcesFolder»/lib/xdb6.jar']
+				
+	
+	compileMonitoringSources:changeDirectory;
+	
+		compile '«monitoringSourcesFolder»/src' ArtifactsNamesEnum.MONITORING.value(protocol) -classpath #[
+		'«monitoringSourcesFolder»/lib/org.pascani.dsl.lib-0.0.1-SNAPSHOT-dependencies.jar',
+		'«monitoringSourcesFolder»/lib/new-personalized-events-with-carvajal.jar',
+		'«monitoringSourcesFolder»/lib/slf4j-api-1.7.10.jar',
+		'«monitoringSourcesFolder»/lib/sigar.jar']
+		
+	}
+	
+	//Compiles only when the communication protocol is Ice
+	on CommonSpecification.host ? protocol == CommunicationProtocolEnum.ICE
+	{
+		
+		/*
+		 * Remove the previous compiled components
+		 */
+		cleanBuildFolder:
+			
+			cmd 'rm -Rf «compilationFolder»'
+			cmd 'mkdir «compilationFolder»'
+		
+		directoryMonitoring:cleanBuildFolder,changeDirectory;
+		
+			cd monitoringSourcesFolder
+		
+		/*
+		 * Compile the Ice-based monitoring sources
+		 */	
+		compileMonitoring:directoryMonitoring;
+		
+			IceInteraction.compileIce("external_probe")
+			IceInteraction.compileIce("monitor")
+			IceInteraction.compileIce("reporter")		
+		
+		/*
+		 * Compile shared components between patterns
+		 */	
+		 
+		initChangeDirectory:changeDirectory;
+			
+			cd sourcesFolder
+		 
+		compileInitialSharedComponents:initChangeDirectory;
+			
+			IceInteraction.compileIce("server")
+		
+		/*
+		 * Compile only initial PC components
+		 */	
+		compileInitialPCComponents ? pattern == PatternEnum.PC :initChangeDirectory;
+		
+			IceInteraction.compileIce("queue")
+			IceInteraction.compileIce("xmlProcessor")
+			IceInteraction.compileIce('intermediate_Control_«numNodes.value()»_«numComponents.value()»')
+			IceInteraction.compileIce('spProcessor_1_«dbConnection.value()»')
+		
+		/*
+		 * Compile only reactor components
+		 */	
+		compileReactorComponents ? pattern == PatternEnum.REACTOR :initChangeDirectory;
+		
+			IceInteraction.compileIce('bridgeXml_12_«numComponents.value()»')
+			IceInteraction.compileIce("loadBalancer")
+			
+			//------------------------------------------
+			
+			IceInteraction.compileIce("actualizaSesion")
+			IceInteraction.compileIce("asignaParentesco")
+			IceInteraction.compileIce("borradoIntegrante")
+			IceInteraction.compileIce("calificacionRiesgo")
+			IceInteraction.compileIce("generarEliminacion")
+			IceInteraction.compileIce("generarInsert")
+			IceInteraction.compileIce("salidaIntegrantes")
+			IceInteraction.compileIce("sentenciaFolio")
+			IceInteraction.compileIce("sentenciaInsertUpdWhere")
+			IceInteraction.compileIce("uspCaracteristicas")
+			IceInteraction.compileIce("uspModFamilias")
+			IceInteraction.compileIce("uspVerificacion")
+		
+		/*
+		 * If six components will be deployed per each slave node, compile only PC components
+		 */		
+		compileSixComponentsPC ? pattern == PatternEnum.PC && (numComponents == ComponentInstancesEnum.SIX || numComponents == ComponentInstancesEnum.TWELVE) :initChangeDirectory;
+		
+			IceInteraction.compileIce('spProcessor_2_«dbConnection.value()»')
+			IceInteraction.compileIce('spProcessor_3_«dbConnection.value()»')
+			IceInteraction.compileIce('spProcessor_4_«dbConnection.value()»')
+			IceInteraction.compileIce('spProcessor_5_«dbConnection.value()»')
+			IceInteraction.compileIce('spProcessor_6_«dbConnection.value()»')
+		
+		/*
+		 * If twelve components will be deployed per each slave node, compile only PC components
+		 */		
+		compileTwelveComponentsPC ? pattern == PatternEnum.PC && (numComponents == ComponentInstancesEnum.SIX.value() || numComponents == ComponentInstancesEnum.TWELVE) :initChangeDirectory;
+		
+			IceInteraction.compileIce('spProcessor_7_«dbConnection.value()»')
+			IceInteraction.compileIce('spProcessor_8_«dbConnection.value()»')
+			IceInteraction.compileIce('spProcessor_9_«dbConnection.value()»')
+			IceInteraction.compileIce('spProcessor_10_«dbConnection.value()»')
+			IceInteraction.compileIce('spProcessor_11_«dbConnection.value()»')
+			IceInteraction.compileIce('spProcessor_12_«dbConnection.value()»')
+									
+	}
+	
+}

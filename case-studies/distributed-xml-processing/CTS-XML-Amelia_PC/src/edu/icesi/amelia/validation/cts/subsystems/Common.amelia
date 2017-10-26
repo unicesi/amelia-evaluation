@@ -1,9 +1,0 @@
-package edu.icesi.amelia.validation.cts.subsystems
-
-subsystem Common
-{
-	
-	param String hostIp
-	param String hostId
-	
-}

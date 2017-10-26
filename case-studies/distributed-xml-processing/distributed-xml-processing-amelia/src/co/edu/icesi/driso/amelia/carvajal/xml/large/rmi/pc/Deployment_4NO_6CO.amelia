@@ -1,0 +1,165 @@
+/**
+ * Copyright 2017 Universidad Icesi
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to
+ * deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ */
+package co.edu.icesi.driso.amelia.carvajal.xml.large.rmi.pc
+
+import java.util.Map
+import org.amelia.dsl.lib.descriptors.Host
+import org.amelia.dsl.lib.util.Hosts
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.PatternEnum
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.DatabaseConnectionTypeEnum
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.ComponentInstancesEnum
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.NodeInstancesEnum
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.CommunicationProtocolEnum
+import co.edu.icesi.driso.amelia.carvajal.xml.large.common.classes.ArtifactsNamesEnum
+
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.shared.Database
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.shared.Compilation
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.shared.Transportation
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.shared.RabbitMQ
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.shared.ExternalProbe
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.shared.Queue
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.shared.LoadBalancer
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.shared.StoreProcedure
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.shared.Server
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.shared.ice.ApacheServer
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.shared.Monitor
+includes co.edu.icesi.driso.amelia.carvajal.xml.large.shared.JmeterReport
+
+/*
+* Deploy the PC strategy once and then
+* stop the executed components .
+*/
+deployment Deployment_4NO_6CO
+{
+	
+	// Load all hosts and then filter
+	val Map<String,Host> hosts = Hosts.hosts("hosts.txt").toMap [h|h.identifier]
+	
+	val baseHosts = #[
+		hosts.get("hgrid14"),
+		hosts.get("hgrid16"),
+		hosts.get("hgrid17")
+	]
+	
+	val consumersHosts = #[
+		hosts.get("hgrid1"),
+		hosts.get("hgrid4"),
+		hosts.get("hgrid5"),
+		hosts.get("hgrid6")
+	]
+	
+	val componentExecutionHosts = baseHosts + consumersHosts
+	
+	//Compilation params
+	val pattern = PatternEnum.PC
+	val protocol = CommunicationProtocolEnum.RMI
+	val actionFolderCompilation = "/home/carvajal/nfs/carvajal/sourcecode"
+	val sourcesFolder = "Procedimientos_PDG"
+	val monitoringSourcesFolder = "Monitoring"
+	val numComponents = ComponentInstancesEnum.SIX
+	val numNodes = NodeInstancesEnum.FOUR
+	val dbConnection = DatabaseConnectionTypeEnum.TYPE_ONE
+	val compilationFolder = "jars"
+	val compilationHost = hosts.get("hgrid16")
+
+	//Execution params
+	val actionFolder = "/home/carvajal/Documents/carvajal"
+	val builtFolder = compilationFolder
+	val libraryFolder = "lib"
+	
+	//External Probe/Queue params
+	val hostExternalProbe = hosts.get("hgrid17")
+	val externalProbeArtifactName = '«ArtifactsNamesEnum.MONITORING.value(protocol)».jar'
+	
+	//Queue params
+	val queueArtifactName = '«ArtifactsNamesEnum.QUEUE.value(protocol)».jar'
+	
+	//SP params
+	val spArtifactName = '«ArtifactsNamesEnum.SERVER.value(protocol)».jar'
+	
+	//Server params
+	val hostBridgeServer = compilationHost
+	val hostIntermediate = hosts.get("hgrid14")
+	val artifactsFolder = actionFolder
+	var serverArtifacName = spArtifactName
+	
+	//Intermediate params
+	val intermediateArtifactName = '«ArtifactsNamesEnum.INTERMEDIATE.value(protocol)».jar'
+	
+	//Monitor params
+	val monitorArfifactName = externalProbeArtifactName
+	val monitorNames = #[
+		"intermediate",
+		"serverBridgedge",
+		"queueExternalProbe",
+		"consumHgrid1",
+		"consumHgrid4",
+		"consumHgrid5",
+		"consumHgrid6"
+	]
+	
+	//JMeter and Report params
+	val hostJmeter = hosts.get("hgrid16")
+	val jmeterLocation = "/home/carvajal/Documents/carvajal/apache-jmeter-2.13/bin"
+	val jmeterFile = "/home/carvajal/Documents/carvajal/ArchivosJmeterXML/XML-REST-1MB.jmx"
+	val reportLocation = "/home/carvajal/Documents/new_Carvajal/REPORTE/"
+	val reporterArtifactName = monitorArfifactName
+	
+	// Add subsystems to deploy
+	add(new Database(hosts.get("hgrid2"),"Liason11"))
+	add(new Compilation(protocol,pattern,sourcesFolder,monitoringSourcesFolder,compilationFolder,numNodes,numComponents,dbConnection,compilationHost,actionFolderCompilation))
+	add(new Transportation(protocol,'«sourcesFolder»/«compilationFolder»',"/home/carvajal/nfs/Carvajal/",null,compilationHost,actionFolderCompilation))
+	add(new Transportation(protocol,"monitoring.jar","/home/carvajal/nfs/Carvajal/jars",null,compilationHost,actionFolderCompilation))
+	
+	for(i:0..componentExecutionHosts.size-1)
+	{
+		add(new Transportation(protocol,"/home/carvajal/nfs/Carvajal/jars","/home/carvajal/Documents/carvajal",null,componentExecutionHosts.get(i),"/"))
+		add(new Transportation(protocol,"/home/carvajal/nfs/Carvajal/lib","/home/carvajal/Documents/carvajal",null,componentExecutionHosts.get(i),"/"))
+	}
+	
+	add(new RabbitMQ(hostExternalProbe,"/"))
+	add(new ExternalProbe(protocol,hostExternalProbe,actionFolder,builtFolder,libraryFolder,externalProbeArtifactName))
+	add(new Queue(protocol,pattern,hostExternalProbe,actionFolder,builtFolder,libraryFolder,queueArtifactName))
+	add(new LoadBalancer(protocol,pattern,null,null,null,null,null))
+	
+	for(i:0..consumersHosts.size-1)
+	{
+		for(j:0..numComponents.value()-1)
+		{
+				add(new StoreProcedure(protocol,pattern,'procedimientos_familia«j+1»_«dbConnection.value()»',consumersHosts.get(i),actionFolder,builtFolder,libraryFolder,spArtifactName))
+		}
+	}
+	
+	add(new Server(protocol,pattern,hostBridgeServer,hostIntermediate,artifactsFolder,numComponents,numNodes,intermediateArtifactName,builtFolder,libraryFolder,serverArtifacName))
+	add(new ApacheServer(protocol, null, "/"))
+	
+	for(i:0..componentExecutionHosts.size-1)
+	{
+		add(new Monitor(protocol,monitorNames.get(i),componentExecutionHosts.get(i),actionFolder,builtFolder,libraryFolder,monitorArfifactName))
+	}
+	
+	add(new JmeterReport(protocol,hostJmeter,jmeterLocation,jmeterFile,reportLocation,hostExternalProbe,actionFolder,builtFolder,libraryFolder,reporterArtifactName))
+	
+	start(true)
+	
+	
+}
